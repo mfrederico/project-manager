@@ -1,0 +1,11 @@
+<form method="POST" action="index.php" id="editForm">
+<input type="hidden" name="action" value="save">
+<input type="hidden" name="type" value="notes">
+<input type="hidden" name="from" value="jobs">
+<input type="hidden" name="id" value="<{$smarty.get.id}>">
+<input type="hidden" name="notes[id]" value="<{$notes.id}>">
+<input type="hidden" name="notes[archived]" value="<{$notes.archived|default:0}>">
+Title: <input type="text" name="notes[title]" value="<{$notes.title|stripslashes|htmlentities}>" style="width:100%"><Br />
+Description: <Br>
+<textarea rows="7" cols="60" name="notes[content]" style="height:400px;width:100%"><{$notes.content|stripslashes|htmlentities}></textarea>
+</form>

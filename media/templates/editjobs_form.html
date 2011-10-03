@@ -1,0 +1,21 @@
+<form method="POST" action="index.php" id="editForm">
+<input type="hidden" name="action" value="save">
+<input type="hidden" name="type" value="jobs">
+<input type="hidden" name="from" value="clients">
+<input type="hidden" name="id" value="<{$smarty.get.id}>">
+<input type="hidden" name="jobs[id]" value="<{$jobs.id}>">
+<input type="hidden" name="jobs[archived]" value="<{$jobs.archived|default:0}>">
+<h4 style="margin:3px">Title</h4>
+<input type="text" name="jobs[title]" value="<{$jobs.title|stripslashes|htmlentities}>" style="width:100%"><Br />
+<h4 style="margin:3px">Approver</h4>
+Name: <input type="text" name="jobs[approvername]" value="<{$jobs.approvername|stripslashes|htmlentities}>" style="width:150px">
+Email: <input type="text" name="jobs[approveremail]" value="<{$jobs.approveremail|stripslashes|htmlentities}>" style="width:150px">
+<h4 style="margin:3px">Details</h4>
+Time Estimate: <input type="text" name="jobs[estimate]" size="3" value="<{$jobs.estimate}>"> hrs @ Rate: <input type="text" size="5" name="jobs[rate]" value="<{$jobs.rate}>"> <Br />
+Description: <br/>
+<small style="font-size:8px">
+- Create a new TASK from the text following the HYPHEN+space<Br />
+! Create a new NOTE from the text following the BANG+space<Br />
+</small>
+<textarea name="jobs[content]" style="width:100%;height:300px"><{$jobs.content|stripslashes|htmlentities}></textarea>
+</form>

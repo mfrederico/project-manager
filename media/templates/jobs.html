@@ -1,0 +1,18 @@
+<li id="jobs_<{$jobs.id}>" class="jobs_widget">
+	<div>
+		<div style="clear:both;height:25px" class="ui-state-default">
+			<a href="#<{$jobs.id}>" class="ui-button ui-icon ui-icon-triangle-1-e openboth"> > </a><a href="index.php?action=get&type=jobs&jobs_id=<{$jobs.id}>&from=clients&id=<{$smarty.get.id}>&r=form" class="editHandler" style="line-height:25px;margin-left:7px;"><{$jobs.title|stripslashes}></a>
+			<div style="float:right">
+				<a class="ui-button ui-icon ui-icon-note editHandler" href="index.php?action=get&type=tasks&from=jobs&id=<{$jobs.id}>&new=1&r=form" title="Add task"></a>
+			</div>
+			<div style="float:right">
+				<a class="ui-button ui-icon ui-icon-comment editHandler" href="index.php?action=get&type=notes&from=jobs&id=<{$jobs.id}>&new=1&r=form" title="Add note"></a>
+			</div>
+		</div>
+		<div class="label ui-state-highlight">
+			<small><{$jobs.content|nl2br|stripslashes}></small>
+			<ul class="notes ui-helper-hidden" style="margin-top:7px;"></ul>
+			<ul class="tasks ui-helper-hidden" style="margin-top:7px;"></ul>
+		</div>
+	</div>
+</li>

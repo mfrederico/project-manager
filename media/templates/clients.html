@@ -1,0 +1,11 @@
+<div class="clients ui-corners-top" id="clients_<{$clients.id}>">
+	<div class="ui-state-default">
+		<div class="label">
+			<a class="ui-button ui-icon ui-icon-triangle-1-e show default" name="jobs" target="clients_<{$clients.id}> .jobs" href="index.php?action=get&type=jobs&from=clients&id=<{$clients.id}>" title="open/close job list"></a>
+			<a class="editHandler" href="index.php?action=get&type=clients&id=<{$clients.id}>&r=form"><{$clients.title|stripslashes}></a>
+
+			<div class="options" style="float:right"><a class="editHandler ui-button ui-icon ui-icon-suitcase" href="index.php?action=get&type=jobs&from=clients&id=<{$clients.id}>&r=form&new=1" title="Add new job">+JOB</a></div>
+		</div>
+	</div>
+	<ul class="jobs"></ul>
+<div>

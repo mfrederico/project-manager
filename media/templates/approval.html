@@ -1,0 +1,47 @@
+	<style>
+		.content { font-family: arial;font-size:12px;}
+		.header { text-align:left}
+		.approve { color:green;font-weight:bold}
+		.decline { color:red;font-weight:bold}
+		.data	{ font-size:12px}
+	</style>
+	<div class="content">
+		<h2>Please approve or decline &quot;<{$item.title}>&quot;</h2>
+		<blockquote>
+			You have been assigned as the contact to test and approve that this <{$type|strtolower}> has been completed as specified.  Once you have verified, please re-visit this email and click the links below as to whether or not you <b>approve</b> or <b>decline</b> that this <{$type|strtolower}> is completed.
+		</blockquote>
+		<p>If you decline, you will have the opportunity to make comments as to why.</p>
+		<h2><{$type}></h2>
+		<table width="100%" class="data">
+			<tr>
+				<th class="header"><b>Name</b></td>
+				<td class="header"><b>Description</b></td>
+			</tr>
+			<tr>
+				<td><{$item.title}></td><td><{$item.content}></td>
+			</tr>
+			<tr>
+				<Td colspan="2"><hr></td>
+			</tr>
+		</table>
+		<h2>Notes</h2>
+		<table width="100%" class="data">
+			<{foreach from=$notes item=n}>
+			<{if $smarty.foreach.n.first}>
+			<tr>
+				<Td><b>Date</b></td><td><b>Title</b></td><td><b>Content</b></td>
+			</tr>
+			<{/if}>
+			<tr>
+				<td style="width:130px"><{$n.updated}></td><td style="width:200px"><{$n.title}></td><td><{$n.note}></td>
+			</tr>
+			<{/foreach}>
+		</table>
+		<hr>
+		<table width="100%">
+			<tr>
+				<td class="approve"><a href="<{$approve_url}>" class="approve">Approve</a></td>
+				<td class="decline"><a href="<{$decline_url}>" class="decline">Decline</a></td>
+			</tr>
+		</table>
+	</div>

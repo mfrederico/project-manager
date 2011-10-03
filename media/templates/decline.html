@@ -1,0 +1,10 @@
+<div style="width:600px">
+	<h2>You have declined the completion of <{$item.title}>.</h2>
+
+	<p>
+		Please take a moment and make any comments that you may have. These will show up as tasks on the project and the project will be put back into play.
+	</p>
+	<p>Please be as specific as possible.</p>
+	<a href="index.php?action=get&type=tasks&from=<{$type}>&id=<{$smarty.get.id}>&r=form" class="ui-button ui-widget ui-state-default ui-corner-all editHandler" title="Add tasks"> Add Task </a>
+</div>
+<div id="dialog"></div>

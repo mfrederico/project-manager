@@ -1,0 +1,29 @@
+	body	{ font-family:arial;font-size:14px;background:white}
+	a		{ text-decoration: none; color:black;}
+	.clients{ background:#EFEFEF;text-align:left;margin-bottom:7px;}
+	.options{ float:left; width:50px;text-align:left }
+
+	.label	{ text-align:left;padding:7px;font-weight:bold}
+	.label small	{ text-align:left;padding:7px;font-weight:normal}
+
+	.jobs	{ margin-left:0px;padding-left:0px;text-align:left;text-decoration:none;list-style-type:none;display:none}
+	.jobs li{ clear:both;margin-bottom:7px;line-height:12px;}
+	.jobs_widget  { margin-left:10px; padding:0px;width:600px;line-height:10px;float:right;}
+
+	.notes  { text-decoration:none;list-style-type:none;text-indent:0px;}
+	.notes_widget  { margin-left:10px; padding:0px;width:80%;}
+
+	.tasks  { text-decoration:none;list-style-type:none;text-indent:0px;}
+	.tasks_widget  { margin-left:10px; padding:0px;width:80%;}
+
+
+	.date	{ font-size:11px;padding:7px;background:#EFEFEF;clear:both;padding:7px;height:13px}
+	.desc	{ font-size:13px;border:1px solid #CDCDCD;padding:7px;background:#CDCDCD;color:black;font-weight:normal}
+	ul		{ list-style-type:none;margin:0px;padding:0px;text-align:left;}
+	li		{ text-align:left}
+
+	/* #container  {display: table;padding-right:7px;text-align:left;width:800px;border-spacing:0px;} */
+	#container  {display:block;padding-right:7px;float:left;text-align:left;width:900px;margin-top:7px;}
+	#archive-view {display:block;float:right;;width:200px}
+	#future-view{display:table-cell;width:400px}
+	#client-view{display:block;float:left;width:680px;}
