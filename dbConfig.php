@@ -1,4 +1,5 @@
 <?php
+// Producion test
 
 // How to get the latest table update information
 // select TABLE_SCHEMA,TABLE_NAME,UPDATE_TIME FROM tables WHERE TABLE_NAME='user' AND TABLE_SCHEMA='hawaii';
