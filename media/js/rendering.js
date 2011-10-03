@@ -1,9 +1,5 @@
+/*
 	cache = new Array();
-
-	function openboth(job_id)
-	{
-		alert(job_id);
-	}
 
 	function render(tpl,dat)
 	{
@@ -27,6 +23,7 @@
 
 		return(rendered);
 	}
+*/
 	
 	function removeWidget(id)
 	{
