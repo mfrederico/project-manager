@@ -1,6 +1,6 @@
 <?php
 
-$type = $_REQUEST['type'];
+$type = $_REQUEST['type'].'_id';
 $i = 0;
 
 foreach($_REQUEST[$type] as $idx=>$id)

@@ -4,13 +4,16 @@ $replace = 'false';
 $type = $_REQUEST['type'];
 $from = $_REQUEST['from'];
 
+$type_id = $_REQUEST[$type.'_id'];
+$from_id = $_REQUEST[$from.'_id'];
+
 if (isset($_REQUEST[$type]))
 {
 	$t = R::dispense($type);
 	$t->import($_REQUEST[$type]);
 	$id = R::store($t);
 
-	$f = R::load($from,$_REQUEST['id']);
+	$f = R::load($from,$_REQUEST[$from.'_id']);
 
 	R::associate($f,$t);
 
@@ -23,9 +26,11 @@ if (isset($_REQUEST[$type]))
 
 */
 
+	$replace = ($type_id > 0) ? $type_id : '0';
+
     $msg = "{$type} #{$id} Saved.";
-	//$returnFunc = "renderObj('index.php?action=get&type={$type}&id={$id}','{$type}','{$replaceId}',$replace);";
-	$returnFunc = "refresh('{$from}_{$_REQUEST['id']}');";
+	$returnFunc = "renderObj('index.php?action=get&from={$from}&{$from}_id={$from_id}&type={$type}&{$type}_id={$id}','{$type}','#{$from}_id_{$from_id} .{$type}',$replace);";
+	//$returnFunc = "refresh('#{$type}_id_{$_REQUEST[$type]['id']}');";
 }
 
 if ($_REQUEST['r'] == 'json') print json_encode(array('msg'=>$msg,'func'=>$returnFunc));

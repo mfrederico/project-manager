@@ -2,7 +2,7 @@
 $replace = 'false';
 
 $type		= $_REQUEST['type'];
-$type_id	= intval($_REQUEST['id']);
+$type_id	= intval($_REQUEST[$type.'_id']);
 
 $notes = '';
 $item  = '';
@@ -23,11 +23,10 @@ if (isset($_REQUEST['type']))
 		approval($this,$type,$item,$notes,$tasks);
 	}
 
-	
 	$replaceId = "{$type}_{$type_id}";
 
     $msg = "{$type} #{$type_id} archived.";
-	$returnFunc = "removeWidget('#{$_REQUEST['type']}_{$type_id}');";//renderObj('index.php?action=get&type={$type}&id={$type_id}','{$type}','{$replaceId}',$replace);";
+	$returnFunc = "removeWidget('#{$_REQUEST['type']}_id_{$type_id}');";//renderObj('index.php?action=get&type={$type}&id={$type_id}','{$type}','{$replaceId}',$replace);";
 }
 
 print json_encode(array('msg'=>$msg,'func'=>$returnFunc));
@@ -39,6 +38,7 @@ function approval($d,$type,$item,$notes = array(),$tasks = array())
 	$uri = str_replace('action','page',$uri);
 
 	$uri = str_replace('archive','approve',$uri);
+/*
 	$d->SMARTY->assign('approve_url','http://'.$_SERVER['SERVER_NAME'].$uri);
 
 	$uri = str_replace('approve','decline',$uri);
@@ -48,7 +48,8 @@ function approval($d,$type,$item,$notes = array(),$tasks = array())
 
 	$d->SMARTY->assign('item',$item);
 	$d->SMARTY->assign('notes',$notes);
-	$content = $d->SMARTY->fetch('approval.html');
+*/
+	$content = file_get_contents($this->config['template_path'].'approval.html');
 
 	if (isset($_REQUEST['show'])) die($content);
 	// DACI - should be "approver" for each task but lets short cut that for now:

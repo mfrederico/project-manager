@@ -1,163 +1,142 @@
+
+var tplData = Array();
+var i = 0;
+
+function renderObj(href,type,target,replace)
+{
+	console.log('Render Obj Target: '+target);
+	if (replace) $(target).html('');
+	var hrefqs = getURLParams(href);
+	getDataFor(target,type,hrefqs[hrefqs['type']+'_id'],hrefqs['from'],hrefqs[hrefqs['from']+'_id']);
+} 
+
+function getDataFor(into,type,type_id,from,from_id)
+{
 /*
-	cache = new Array();
-
-	function render(tpl,dat)
-	{
-		var rendered = '<em>'+tpl+': undefined</em>';
-		var tpl_id = tpl.replace('.','_');
-
-		if (typeof(cache[tpl_id]) == 'undefined')
-		{
-			$.ajaxSetup({cache:false, async:false});
-			$.ajax({ 
-				url: 'media/templates/'+tpl+'.html',
-				dataType: 'html',
-				success: function (data) 
-				{ 
-					cache [ tpl_id ] = data; 
-				}
-			});
-		}
-
-		rendered = $.jqote(cache[tpl_id],dat);
-
-		return(rendered);
-	}
+	console.log(into);
+	console.log(type);
+	console.log(type_id);
+	console.log(from);
+	console.log(from_id);
 */
-	
-	function removeWidget(id)
+	url = '';
+	if (typeof from != 'undefined' && from.length) 
 	{
-		$(id).remove();
+		url+='from='+from+'&';
+		if (typeof from_id != 'undefined') url+=from+'_id='+from_id+'&';
+	}
+	if (typeof type != 'undefined' && type.length) 
+	{
+		url+='type='+type+'&';
+		if (typeof type_id != 'undefined') url+=type+'_id='+type_id+'&';
 	}
 
-    function renderObj(href,type,target,replace)
-    {
-
-        if (replace) $(target).html('');
-		$.ajaxSetup({cache:false, async:false});
-
-        t = $.getJSON(href,function(objData)
-        {
-			//console.log('Href: '+href+' Type: '+type+ ' Target: '+target);
-			$('#'+target).html('');
-			$.each(objData,function(objK,objV)
-            {
-				if (replace) $('#'+target).replaceWith(objV);
-				else $('#'+target).append(objV);
-            });
-
-			$('#'+target).sortable(
-			{
-			//	containment: 'parent',
-				connectWith: '#past',
-				items: 'li.'+type+'_widget',
-				/* axis: 'y', */
-			});
-			//$('li.'+type+'_widget').droppable({ greedy:true, hoverClass: 'ui-state-disabled'});
-        });
-    } 
-
-	function refresh(obj)
+	$.getJSON('index.php?action=get&'+url+'&r=json',function(data,ui)
 	{
-		if ($('#'+obj+' a:first').hasClass('ui-icon-triangle-1-e'))
+		$(data[type]).each(function(k,vars)
 		{
-			$('#'+obj+' a:first').click();
-		} 
+			if (typeof tplData[type] == 'undefined')
+			{
+				tplData[type] = $.ajax({ url: 'media/templates/'+type+'_tpl.html', async: false }).responseText;
+			}
+
+			$(into).append(tplData[type]);
+
+			$(into).find('#'+type).attr('id',type+'_id_'+vars.id);
+
+			id = '#'+type+'_id_'+vars.id;
+			query_id = type+'_id='+vars.id;
+
+			$(id).parent().sortable(
+			{
+				connectWith: '#past',
+				items: '.'+type+'_widget',
+			});
+
+			plugDataInto(into,id,query_id,vars)
+
+		});
+	});
+}
+
+function plugDataInto(into,id,query_id,vars)
+{
+	// Plug all my params into this .. thing ..
+	jQuery.each(vars,function(className,classVal)
+	{
+		$(into).find(id+' .'+className).val(classVal);
+		$(into).find(id+' .'+className).text(classVal);
+	});
+	
+	// Append my id to all my href's in this section
+	$(into).find(id+' a').each(function(k,v)
+	{
+		$(this).attr('href',$(this).attr('href') + '&'+query_id);
+	});
+}
+
+function getURLParams(aURL)
+{
+	var responseObj = {};
+	if (aURL.indexOf('?') > -1) {
+		var argArray = aURL.substr(aURL.indexOf('?') + 1).split('&');
+		var key, val;
+		var safeRe = /^([0-9]{1,}|true|false)$/i;
+		var quoteRe = /'/g;
+		for (var i = 0; i < argArray.length; i++) {
+			key = '';
+			val = '';
+			if (argArray[i].indexOf('=') > -1) {
+				key = argArray[i].substr(0, argArray[i].indexOf('='));
+				val = argArray[i].substr(argArray[i].indexOf('=') + 1);
+				val = unescape(val);
+			} else {
+				key = argArray[i];
+			}
+			responseObj[key] = val;
+		}
+	}
+	return responseObj;
+}
+
+function removeWidget(id)
+{
+	$(id).remove();
+}
+
+
+$(document).ready(function()
+{
+	getDataFor('#main','clients','1');
+
+	$('.sortable').live('sortupdate',function(e,ui)
+	{
+		if (typeof $(this).children().attr('class') != 'undefined')
+		{
+			widget = $(this).children().attr('class').split('_');
+			widget = widget[0];
+			$.ajax({ url: 'index.php?action=sort&type='+widget,data : $(this).sortable('serialize') } );
+		}
+	});
+
+	$('.openboth').live('click',function(e)
+	{
+		e.preventDefault();
+		obj = $(this);
+		var hrefqs = getURLParams($(obj).attr('href'));
+		var job_id = hrefqs['jobs_id'];
+
+		if ($(obj).hasClass('ui-icon-triangle-1-e'))
+		{
+			getDataFor('#jobs_id_'+job_id+ ' .notes','notes','','jobs',job_id);
+			getDataFor('#jobs_id_'+job_id+ ' .tasks','tasks','','jobs',job_id);
+		}
 		else
 		{
-			$('#'+obj+' a:first').click().click();
+			jid = $(obj).closest('.top').attr('id');
+			$('#'+jid+' .notes_widget,#'+jid+' .tasks_widget').remove();
 		}
+		$(this).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
+	}); 
 
-	}
-
-	function reveal(obj)
-	{
-		target	= $(obj).attr('target');
-		href	= $(obj).attr('href');
-		type	= $(obj).attr('name');
-
-		//console.log(target);
-		if($(obj).hasClass('ui-icon-triangle-1-e'))
-		{
-			renderObj(href,type,target,false);
-		}
-		$(obj).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
-		$('#'+target).slideToggle();
-	}
-
-	function findFirstParentAttr(target,attr)
-	{
-		var first    = 0;
-		var foundId    = '';
-		t = $(target).parents().each(function()
-		{
-			if ($(this).attr(attr).length && first++ < 1) 
-			{
-				foundId = this.id;
-				return(this.id);
-			}
-		});
-		return(foundId);
-	}
-
-	$(function()
-	{
-		// Render the client widget objects
-		renderObj('index.php?action=get&type=clients','clients','client-view');
-
-		// Reveal the default clients
-		reveal('.clients a.default');
-
-		$('.openboth').live('click',function(e)
-		{
-			var job_id = $(this).attr('href').substr(1);
-			var tmp		= $(this).clone();
-			$(tmp).attr('href',"index.php?action=get&type=notes&from=jobs&id="+job_id);
-			$(tmp).attr('target', "jobs_"+job_id+ ' .notes');
-			$(tmp).attr('name',"notes");
-			reveal($(tmp));
-
-			var tmp		= $(this).clone();
-			$(tmp).attr('href',"index.php?action=get&type=tasks&from=jobs&id="+job_id);
-			$(tmp).attr('target',"jobs_"+job_id+ ' .tasks');
-			$(tmp).attr('name',"tasks");
-			reveal($(tmp));
-			$(this).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
-		});
-
-		$('.show').live('click',function(e)
-		{
-			e.preventDefault();
-			thisId = reveal(this);
-		});
-
-		$('ul').live('sortupdate',function(e,ui)
-		{
-			if (typeof $(this).children().attr('class') != 'undefined')
-			{
-				widget = $(this).children().attr('class').split('_');
-				widget = widget[0];
-				$.ajax({ url: 'index.php?action=sort&type='+widget,data : $(this).sortable('serialize') } );
-			}
-		});
-
-		$('#archive').droppable(
-		{
-			tolerance : 'pointer',
-			activeClass : "ui-state-active",
-			hoverClass  : "ui-state-highlight",
-			drop: function(event,ui)
-			{
-				uiid = ui.draggable.attr('id');
-				dat = uiid.split('_');
-				widget = dat[0];
-				id = dat[1];
-			//	$('#'+uiid).hide();
-				$.ajax({ url: 'index.php?action=archive&type='+widget+'&id='+id, dataType: 'json', success: function(data)
-				{
-					if (data['func'].length) eval(data['func']);
-				}})
-			}
-		});
-
-	});
+});

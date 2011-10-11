@@ -136,14 +136,6 @@ class Kernel
 
 	function setupClasses()
 	{
-		//..... Set some smarty defaults
-		$this->SMARTY->template_dir		= $this->media."/templates/";
-		$this->SMARTY->config_dir		= $this->media."/config/";
-		$this->SMARTY->compile_dir		= $this->config['template_cache_dir'];
-		$this->SMARTY->compile_id		= $this->PROJECT;
-		$this->SMARTY->left_delimiter	= "<{";
-		$this->SMARTY->right_delimiter	= "}>";
-
 		if (isset($_REQUEST['dbg'])) $this->SMARTY->debugging     = true;
 		$this->origCid                  = $this->SMARTY->compile_id;
 
@@ -312,8 +304,6 @@ class Kernel
 		$tplData	= '';
 		$classNameUC= '';
 
-		$this->SMARTY->assign('config',$this->config);
-
 		if (count($files))
 		{
 			foreach($files as $plugType=>$codeBases) 
@@ -322,7 +312,7 @@ class Kernel
 				foreach($codeBases as $idx=>$codeBase)
 				{
 					//...... Reset position type
-					$pos	= "append";
+					$pos	= "content";
 
 					//..... Chdir to plugin codebase
 					if (strlen($codeBase['dir'])) chdir($codeBase['dir']);
@@ -351,7 +341,7 @@ class Kernel
 						$codePos[$codeBase['dir'].$codeBase['codeFile']] = $pos;
 						if ($plugType == 'main') $has_main++;
 					}
-					else $codePos[$codeBase['dir'].$codeBase['codeFile']] = 'append';
+					else $codePos[$codeBase['dir'].$codeBase['codeFile']] = 'content';
 
 					//..... Go back to original directory
 					if (strlen($codeBase['dir'])) chdir($this->origDir);
@@ -364,7 +354,7 @@ class Kernel
 				foreach($codeBases as $codeBase)
 				{
 					$pos = $codePos[$codeBase['dir'].$codeBase['codeFile']];
-					if (!strlen($pos)) $pos = 'append';
+					if (!strlen($pos)) $pos = 'content';
 
 					//..... Chdir to plugin codebase
 					if (strlen($codeBase['dir'])) chdir($codeBase['dir']);
@@ -373,14 +363,13 @@ class Kernel
 					{
 						// If we are rendering a partial .. 
 		 				if ($codeBase['controlType'] == 'part') $codeBase['codeFile'] = $codeBase['codeFile'].'.'.$codeBase['method'];
-						$this->SMARTY->compile_id		= $this->origCid.$codeBase['dir'].$codeBase['codeFile'];
-						if (file_exists($this->SMARTY->template_dir.$codeBase['codeFile'].'.html'))
+						if (file_exists($this->config['template_path'].$codeBase['codeFile'].'.html'))
 						{
-							$tplData = $this->SMARTY->fetch("{$codeBase['codeFile']}.html");
+							$tplData = $this->config['template_path']."{$codeBase['codeFile']}.html";
 						}
 						else
 						{
-							$tplData = ($has_main) ? $this->SMARTY->fetch("blank.html") : '';
+							$tplData = $this->config['template_path']."blank.html";
 						}
 						$this->outputData[$pos][]	= $tplData;
 					}
@@ -389,7 +378,6 @@ class Kernel
 					if (strlen($codeBase['dir'])) chdir($this->origDir);
 				}
 				//...... Are we running code for main functionality, to allow plugin handling
-				//if(isset($this->SMARTY)) $this->SMARTY->assign('plugins',$this->outputData);
 			}
 		}
 	}
@@ -423,16 +411,15 @@ class Kernel
 		//..... USUALLY comes from a page -- display
 		if ($this->controlType == 'page' OR $this->controlType == 'part')
 		{
-			//...... Assign all framework vars into smarty
-			$this->SMARTY->assign('output',$this->outputData);
-
-			// Maybe turn this on some day?
-			/*
-			$this->SMARTY->caching = 1;
-			$this->SMARTY->compile_check = true;
-			*/
 			if (isset($_GET['layout'])) $this->setLayout($_GET['layout']);
-			$this->SMARTY->display($this->getLayout());
+			readfile($this->config['template_path'].$this->getLayout());
+			foreach($this->outputData as $k=>$v)
+			{
+				foreach($v as $page)
+				{
+					print "<script>\$(function(){\$('#{$k}').append(\$.ajax({ url: '{$page}', async:false}).responseText);});</script>";
+				}
+			}
 		}
 		//...... USUALLY comes from an action or no display
 		if (strlen($this->redirect))	
