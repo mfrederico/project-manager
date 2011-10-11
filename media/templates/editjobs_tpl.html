@@ -1,0 +1,21 @@
+<form method="POST" action="index.php" id="editForm" class="jobs">
+<input type="hidden" name="action" value="save">
+<input type="hidden" name="type" value="jobs">
+<input type="hidden" name="from" value="clients">
+<input type="hidden" name="jobs[id]" class="id" value="">
+<input type="hidden" name="jobs[archived]" class="archived" value="">
+<input type="hidden" name="clients_id" class="clients_id" value="">
+<h4 style="margin:3px">Title</h4>
+<input type="text" name="jobs[title]" class="title" value="" style="width:100%"><Br />
+<h4 style="margin:3px">Approver</h4>
+Name: <input type="text" name="jobs[approvername]" class="approvername" value="" style="width:150px">
+Email: <input type="text" name="jobs[approveremail]" class="approveremail" value="" style="width:150px">
+<h4 style="margin:3px">Details</h4>
+Time Estimate: <input type="text" name="jobs[estimate]" class="estimate" size="3" value=""> hrs @ Rate: <input type="text" class="rate" size="5" name="jobs[rate]" value=""> <Br />
+Description: <br/>
+<small style="font-size:8px">
+- Create a new TASK from the text following the HYPHEN+space<Br />
+! Create a new NOTE from the text following the BANG+space<Br />
+</small>
+<textarea name="jobs[content]" class="content" style="width:100%;height:300px"></textarea>
+</form>
