@@ -61,9 +61,24 @@ function getDataFor(into,type,type_id,from,from_id)
 
 function plugDataInto(into,id,query_id,vars)
 {
+
+	// Parent id wrangling
+	parent_id = (into.substr(1,into.length));
+	widgets = parent_id.split(' ');
+	parent_widget = widgets[0].split('_');
+	
+	//console.log('Into: '+into+" Widgets: "+widgets[0]+' '+widgets[1]+' Parent Id: '+parent_widget[0]);
+	if (typeof parent_widget[2] != 'undefined') 
+	{
+		vars[parent_widget[0]+'_id'] = parent_widget[2];
+        query_id = query_id + '&from='+parent_widget[0]+'&'+parent_widget[0]+'_id='+parent_widget[2]
+
+	}
+
 	// Plug all my params into this .. thing ..
 	jQuery.each(vars,function(className,classVal)
 	{
+		//console.log("Class: "+className+' = '+classVal);
 		$(into).find(id+' .'+className).val(classVal);
 		$(into).find(id+' .'+className).text(classVal);
 	});

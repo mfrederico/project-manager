@@ -26,7 +26,6 @@ if (!isset($_REQUEST['new']))
 		$from		= R::load($_REQUEST['from'],intval($fid));
 		$data[$_REQUEST['from']] = $from->export();;
 
-
 		// If we dont have a type specified
 		if (!$tid)
 		{	
