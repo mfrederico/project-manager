@@ -10,18 +10,15 @@
 
 	function addEditDialog(obj,top_id)
 	{
+		var d = { title : '' };
+
 		params = getURLParams(obj.attr('href'));
 
 		type	= params.type;
 		type_id = params[type+'_id'];
-			
-		parentData	= top_id.split('_');
 
-		if (parentData)
-		{
-			parentType	= parentData[0];
-			parentId	= parentData[2];
-		}
+
+		parentData	= top_id.split('_');
 
 		if (typeof tplData['edit'+type] == 'undefined')
 		{
@@ -30,7 +27,6 @@
 
 		$.getJSON($(obj).attr('href')+'&r=json',function(data)
 		{
-			var d = { title : '' };
 
 			if (data != null) 
 			{
@@ -41,6 +37,14 @@
 
 			if (parentData) 
 			{
+				if (typeof params.from !='undefined')
+				{
+					from	= params.from;
+					from_id = params[from+'_id'];
+					d[from+'_id'] = from_id;
+				}
+				parentType	= parentData[0];
+				parentId	= parentData[2];
 				d[parentType+'_id'] = (parentId > 0) ? parentId : 'x';
 			}
 

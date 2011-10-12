@@ -4,7 +4,7 @@ $replace = 'false';
 $type = $_REQUEST['type'];
 $from = $_REQUEST['from'];
 
-$type_id = $_REQUEST[$type.'_id'];
+$type_id = $_REQUEST[$type]['id'];
 $from_id = $_REQUEST[$from.'_id'];
 
 if (isset($_REQUEST[$type]))

@@ -4,13 +4,13 @@ var i = 0;
 
 function renderObj(href,type,target,replace)
 {
-	console.log('Render Obj Target: '+target);
-	if (replace) $(target).html('');
+	console.log('Render Obj Target: '+target+' Type:'+type);
+	//if (replace) $('#'+type+'_id_'+replace).hide('fade');
 	var hrefqs = getURLParams(href);
-	getDataFor(target,type,hrefqs[hrefqs['type']+'_id'],hrefqs['from'],hrefqs[hrefqs['from']+'_id']);
+	getDataFor(target,type,hrefqs[hrefqs['type']+'_id'],hrefqs['from'],hrefqs[hrefqs['from']+'_id'],replace);
 } 
 
-function getDataFor(into,type,type_id,from,from_id)
+function getDataFor(into,type,type_id,from,from_id,replace)
 {
 /*
 	console.log(into);
@@ -40,7 +40,7 @@ function getDataFor(into,type,type_id,from,from_id)
 				tplData[type] = $.ajax({ url: 'media/templates/'+type+'_tpl.html', async: false }).responseText;
 			}
 
-			$(into).append(tplData[type]);
+			if (!replace) $(into).append(tplData[type]);
 
 			$(into).find('#'+type).attr('id',type+'_id_'+vars.id);
 
@@ -53,7 +53,9 @@ function getDataFor(into,type,type_id,from,from_id)
 				items: '.'+type+'_widget',
 			});
 
-			plugDataInto(into,id,query_id,vars)
+			plugDataInto(into,id,query_id,vars);
+
+			if (replace) $('#'+type+'_id_'+vars.id).show('pulsate');
 
 		});
 	});
@@ -61,7 +63,7 @@ function getDataFor(into,type,type_id,from,from_id)
 
 function plugDataInto(into,id,query_id,vars)
 {
-
+	
 	// Parent id wrangling
 	parent_id = (into.substr(1,into.length));
 	widgets = parent_id.split(' ');
@@ -72,9 +74,7 @@ function plugDataInto(into,id,query_id,vars)
 	{
 		vars[parent_widget[0]+'_id'] = parent_widget[2];
         query_id = query_id + '&from='+parent_widget[0]+'&'+parent_widget[0]+'_id='+parent_widget[2]
-
 	}
-
 	// Plug all my params into this .. thing ..
 	jQuery.each(vars,function(className,classVal)
 	{
