@@ -14,36 +14,37 @@ $typeName = strtolower($type);
 	<div class="content">
 		<h2>Please approve or decline &quot;<?php echo $item['title'] ?>&quot;</h2>
 		<blockquote>
-			You have been assigned as the contact to test and approve that this <?php echo strtolower($typeName)?> has been completed as specified.  Once you have verified, please re-visit this email and click the links below as to whether or not you <b>approve</b> or <b>decline</b> that this <?php echo strtolower($typeName)?> is completed.
+			You have been assigned as the contact to test and approve that this <?php echo $typeName?> has been completed as specified.  Once you have verified, please re-visit this email and click the links below as to whether or not you <b>approve</b> or <b>decline</b> that this <?php echo $typeName?> is completed.
 		</blockquote>
 		<p>If you decline, you will have the opportunity to make comments as to why.</p>
-		<h2><?php echo $typeName?></h2>
-		<table width="100%" class="data">
-			<tr>
-				<th class="header"><b>Name</b></td>
-				<td class="header"><b>Description</b></td>
-			</tr>
-			<tr>
-				<td><?php echo $item['title']?></td><td><?php echo $item['content']?></td>
-			</tr>
-			<tr>
-				<Td colspan="2"><hr></td>
-			</tr>
-		</table>
-<?php if ($type == 'jobs') { ?>
+		<h2><?php echo $type?></h2>
+		<fieldset>
+				<legend><b><?php echo $item['title']?></b></legend>
+				<?php echo $item['content']?></td>
+		</fieldset>
+<?php if ($typeName == 'job') { ?>
+		<h2>Tasks</h2>
+			<?php foreach($tasks as $t): ?>
+			<?php if ($i++ == 0) { ?>
+			<?php } ?>
+			<fieldset><legend><b><?php echo $t['title']?></b></legend>
+			<b>Start: </b><?php echo $t['start']?>
+			<b>Finish: </b><?php echo $t['finish']?>
+			<?php if ($t['approveremail']) : ?>
+			<b>Approver: </b><?php echo $t['approvername']?>  <?php echo ($t['approved']) ? "<em style=\"color:green\">approved!</em>" : "<em style=\"color:red\">not approved!</em>"; ?>
+			<?php endif;?>
+			<p>
+			<?php echo $t['content']?>
+			</p>
+			</fieldset>
+			<?php endforeach?>
+
 		<h2>Notes</h2>
-		<table width="100%" class="data">
 			<?php foreach($notes as $n): ?>
 			<?php if ($i++ == 0) { ?>
-			<tr>
-				<Td><b>Date</b></td><td><b>Title</b></td><td><b>Content</b></td>
-			</tr>
 			<?php } ?>
-			<tr>
-				<td style="width:130px"><?php echo $n['updated']?></td><td style="width:200px"><?php echo $n['title']?></td><td><?php echo $n['note']?></td>
-			</tr>
+			<fieldset><legend><b><?php echo $n['title']?></b></legend><?php echo $n['content']?></fieldset>
 			<?php endforeach?>
-		</table>
 		<hr>
 <?php } ?>
 		<table width="100%">

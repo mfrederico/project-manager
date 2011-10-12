@@ -18,8 +18,14 @@ if (isset($_REQUEST['type']))
 
 	if (strlen($item['approvername']) && strlen($item['approveremail']))
 	{
-		$notes = R::related($j,'notes');
-		if ($type == 'jobs') $tasks = R::related($j,'tasks');
+		$n = R::related($j,'notes');
+		foreach($n as $k) $notes[] = $k->export();
+
+		if ($type == 'jobs') 
+		{
+			$t = R::related($j,'tasks');
+			foreach($t as $k) $tasks[] = $k->export();
+		}
 		approval($this,$type,$item,$notes,$tasks);
 	}
 
@@ -43,12 +49,21 @@ function approval($d,$type,$item,$notes = array(),$tasks = array())
 	$decline_url = 'http://'.$_SERVER['SERVER_NAME'].$uri;
 
 	$type = rtrim(ucfirst($type),'s');
+	ob_start();
 	include_once($d->config['template_path'].'approval.html');
+	$content = ob_get_contents();
+	ob_end_clean();
 
 	if (isset($_REQUEST['show'])) die($content);
 
+	$item['approveremail'] = 'mfrederi@adobe.com';
+
 	// DACI - should be "approver" for each task but lets short cut that for now:
-	if (!mail("{$item['approvername']} <{$item['approveremail']}>",'MattTask: '.$item['title'].' please approve!',$content,"Content-Type: text/html\nFrom: {$this->config['user_name']} via MattTask <{$this->config['user_email']}>")) die('Cannot send approval email!');
+	if (!mail("{$item['approvername']} <{$item['approveremail']}>",
+			'MattTask: '.$item['title'].' please approve!',
+			$content,
+			"Content-Type: text/html\nFrom: {$d->config['user_name']} via MattTask <{$d->config['user_email']}>")) 
+	{ die('Cannot send approval email!'); }
 }
 
 
