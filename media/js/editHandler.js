@@ -18,7 +18,7 @@
 		type_id = params[type+'_id'];
 
 
-		parentData	= top_id.split('_');
+		if (typeof top_id != 'undefined') parentData	= top_id.split('_');
 
 		if (typeof tplData['edit'+type] == 'undefined')
 		{
@@ -35,7 +35,7 @@
 			}
 			else d_title = 'Create '+type;
 
-			if (parentData) 
+			if (typeof parentData != 'undefined') 
 			{
 				if (typeof params.from !='undefined')
 				{

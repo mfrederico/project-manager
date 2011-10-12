@@ -4,7 +4,7 @@ var i = 0;
 
 function renderObj(href,type,target,replace)
 {
-	console.log('Render Obj Target: '+target+' Type:'+type);
+	//console.log('Render Obj Target: '+target+' Type:'+type);
 	//if (replace) $('#'+type+'_id_'+replace).hide('fade');
 	var hrefqs = getURLParams(href);
 	getDataFor(target,type,hrefqs[hrefqs['type']+'_id'],hrefqs['from'],hrefqs[hrefqs['from']+'_id'],replace);
@@ -63,7 +63,7 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 
 function plugDataInto(into,id,query_id,vars)
 {
-	console.log('Into: '+into);
+	//console.log('Into: '+into);
 	// Parent id wrangling
 	parent_id = (into.substr(1,into.length));
 	widgets = parent_id.split(' ');

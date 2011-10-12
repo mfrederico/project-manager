@@ -1,10 +1,15 @@
+<?php
+$type = $_REQUEST['type'];
+$type_id = $_REQUEST[$type.'_id'];
+$item = R::load($type,$type_id);
+?>
 <div style="width:600px">
-	<h2>You have declined the completion of <{$item.title}>.</h2>
+	<h2>You have declined the completion of <?php echo $item['title']?>.</h2>
 
 	<p>
 		Please take a moment and make any comments that you may have. These will show up as tasks on the project and the project will be put back into play.
 	</p>
 	<p>Please be as specific as possible.</p>
-	<a href="index.php?action=get&type=tasks&from=<{$type}>&id=<{$smarty.get.id}>&r=form" class="ui-button ui-widget ui-state-default ui-corner-all editHandler" title="Add tasks"> Add Task </a>
+	<a href="index.php?action=get&type=<?php echo $type?>&<?php echo $type?>_id=<?php echo $type_id?>&r=form" class="ui-button ui-widget ui-state-default ui-corner-all editHandler" title="Edit <?php echo $type?>"> Edit <?php echo $type?></a>
 </div>
 <div id="dialog"></div>

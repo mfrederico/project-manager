@@ -36,24 +36,19 @@ function approval($d,$type,$item,$notes = array(),$tasks = array())
 	$uri = $_SERVER['REQUEST_URI'];
 
 	$uri = str_replace('action','page',$uri);
-
 	$uri = str_replace('archive','approve',$uri);
-/*
-	$d->SMARTY->assign('approve_url','http://'.$_SERVER['SERVER_NAME'].$uri);
+	$approve_url = 'http://'.$_SERVER['SERVER_NAME'].$uri;
 
 	$uri = str_replace('approve','decline',$uri);
-	$d->SMARTY->assign('decline_url','http://'.$_SERVER['SERVER_NAME'].$uri);
+	$decline_url = 'http://'.$_SERVER['SERVER_NAME'].$uri;
 
-	$d->SMARTY->assign('type',rtrim(ucfirst($type),'s'));
-
-	$d->SMARTY->assign('item',$item);
-	$d->SMARTY->assign('notes',$notes);
-*/
-	$content = file_get_contents($this->config['template_path'].'approval.html');
+	$type = rtrim(ucfirst($type),'s');
+	include_once($d->config['template_path'].'approval.html');
 
 	if (isset($_REQUEST['show'])) die($content);
+
 	// DACI - should be "approver" for each task but lets short cut that for now:
-	if (!mail("{$item['approvername']} <{$item['approveremail']}>",'MattTask: '.$item['title'].' please approve!',$content,"Content-Type: text/html\nFrom: MattTask <mfrederi@adobe.com>")) die('Cannot send approval email!');
+	if (!mail("{$item['approvername']} <{$item['approveremail']}>",'MattTask: '.$item['title'].' please approve!',$content,"Content-Type: text/html\nFrom: {$this->config['user_name']} via MattTask <{$this->config['user_email']}>")) die('Cannot send approval email!');
 }
 
 

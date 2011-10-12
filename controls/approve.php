@@ -1,27 +1,26 @@
 <?php
 
 $type = $_REQUEST['type'];
+$type_id = $_REQUEST[$type.'_id'];
 
 if (isset($_REQUEST['type']))
 {
-	$j = R::load($type,$_REQUEST['id']);
-	$j->approved = 1;
-	$id		= R::store($j);
-	$this->SMARTY->assign('item',$j->export());
+	$item = R::load($type,$type_id);
+	$item->approved = 1;
+	$id		= R::store($item);
 
 	$date = date('Y-m-d H:i:s');
 	$content = <<<__EOT__
 
-<h3>{$type}</h3><pre>
-Title       : {$j['title']}
-Description : {$j['content']}
+<h3>{$item['title']}</h3><pre>
 Date        : {$date}
-Approved by : {$j['approvername']} {$j['approveremail']}
+Description : {$item['content']}
+Approved by : {$item['approvername']} {$item['approveremail']}
 </pre>
 
 __EOT__;
 
-    if (!mail("Matthew Frederico <mfrederi@adobe.com>",'MattTask: '.$j['title'].' has been approved!',$content,"Content-Type: text/html\nFrom: {$j['approvername']} <{$j['approveremail']}>")) die('Cannot send approval email!');
+    if (!mail("{$this->config['user_name']} <{$this->config['user_email']}>",'MattTask: '.$item['title'].' has been approved!',$content,"Content-Type: text/html\nFrom: {$item['approvername']} <{$item['approveremail']}>")) die('Cannot send approval email!');
 
 }
 

@@ -14,4 +14,7 @@ $config['session_save_path']	= $this->cwd.'/data/';
 $config['template_cache_dir']	= $this->cwd.'/data/';
 $config['template_path']		= 'media/templates/';
 
+$config['user_name']			= 'Matthew Frederico';
+$config['user_email']			= 'mfrederi@adobe.com';
+
 ?>

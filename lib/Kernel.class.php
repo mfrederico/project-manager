@@ -412,12 +412,14 @@ class Kernel
 		if ($this->controlType == 'page' OR $this->controlType == 'part')
 		{
 			if (isset($_GET['layout'])) $this->setLayout($_GET['layout']);
-			readfile($this->config['template_path'].$this->getLayout());
+			if (isset($_GET['l'])) $this->setLayout($_GET['l']);
+			include($this->config['template_path'].$this->getLayout());
 			foreach($this->outputData as $k=>$v)
 			{
 				foreach($v as $page)
 				{
-					print "<script>\$(function(){\$('#{$k}').append(\$.ajax({ url: '{$page}', async:false}).responseText);});</script>";
+					//print "<script>\$(function(){\$('#{$k}').append(\$.ajax({ url: '{$page}', async:false}).responseText);});</script>";
+					include($page);
 				}
 			}
 		}

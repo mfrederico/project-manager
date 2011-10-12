@@ -1,17 +1,14 @@
 <?php
 
 $type = $_REQUEST['type'];
+$type_id = $_REQUEST[$type.'_id'];
 
 if (isset($_REQUEST['type']))
 {
-	$j = R::load($type,$_REQUEST['id']);
-	$j->approved = 0;
-	$j->archived = 0;
-	$id		= R::store($j);
-	$this->SMARTY->assign('item',$j->export());
-
-	$this->SMARTY->assign('type',$type);
+	$item = R::load($type,$type_id);
+	$item->approved = 0;
+	$item->archived = 0;
+	$id	= R::store($item);
 }
-
 
 ?>

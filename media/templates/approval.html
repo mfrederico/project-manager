@@ -1,3 +1,9 @@
+<?php
+// Configurate here
+
+$typeName = strtolower($type);
+
+?>
 	<style>
 		.content { font-family: arial;font-size:12px;}
 		.header { text-align:left}
@@ -6,42 +12,44 @@
 		.data	{ font-size:12px}
 	</style>
 	<div class="content">
-		<h2>Please approve or decline &quot;<{$item.title}>&quot;</h2>
+		<h2>Please approve or decline &quot;<?php echo $item['title'] ?>&quot;</h2>
 		<blockquote>
-			You have been assigned as the contact to test and approve that this <{$type|strtolower}> has been completed as specified.  Once you have verified, please re-visit this email and click the links below as to whether or not you <b>approve</b> or <b>decline</b> that this <{$type|strtolower}> is completed.
+			You have been assigned as the contact to test and approve that this <?php echo strtolower($typeName)?> has been completed as specified.  Once you have verified, please re-visit this email and click the links below as to whether or not you <b>approve</b> or <b>decline</b> that this <?php echo strtolower($typeName)?> is completed.
 		</blockquote>
 		<p>If you decline, you will have the opportunity to make comments as to why.</p>
-		<h2><{$type}></h2>
+		<h2><?php echo $typeName?></h2>
 		<table width="100%" class="data">
 			<tr>
 				<th class="header"><b>Name</b></td>
 				<td class="header"><b>Description</b></td>
 			</tr>
 			<tr>
-				<td><{$item.title}></td><td><{$item.content}></td>
+				<td><?php echo $item['title']?></td><td><?php echo $item['content']?></td>
 			</tr>
 			<tr>
 				<Td colspan="2"><hr></td>
 			</tr>
 		</table>
+<?php if ($type == 'jobs') { ?>
 		<h2>Notes</h2>
 		<table width="100%" class="data">
-			<{foreach from=$notes item=n}>
-			<{if $smarty.foreach.n.first}>
+			<?php foreach($notes as $n): ?>
+			<?php if ($i++ == 0) { ?>
 			<tr>
 				<Td><b>Date</b></td><td><b>Title</b></td><td><b>Content</b></td>
 			</tr>
-			<{/if}>
+			<?php } ?>
 			<tr>
-				<td style="width:130px"><{$n.updated}></td><td style="width:200px"><{$n.title}></td><td><{$n.note}></td>
+				<td style="width:130px"><?php echo $n['updated']?></td><td style="width:200px"><?php echo $n['title']?></td><td><?php echo $n['note']?></td>
 			</tr>
-			<{/foreach}>
+			<?php endforeach?>
 		</table>
 		<hr>
+<?php } ?>
 		<table width="100%">
 			<tr>
-				<td class="approve"><a href="<{$approve_url}>" class="approve">Approve</a></td>
-				<td class="decline"><a href="<{$decline_url}>" class="decline">Decline</a></td>
+				<td class="approve"><a href="<?php echo $approve_url?>" class="approve">Approve</a></td>
+				<td class="decline"><a href="<?php echo $decline_url?>" class="decline">Decline</a></td>
 			</tr>
 		</table>
 	</div>

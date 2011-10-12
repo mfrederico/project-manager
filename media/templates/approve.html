@@ -1,5 +1,10 @@
+<?php
+$type = $_REQUEST['type'];
+$type_id = $_REQUEST[$type.'_id'];
+$item = R::load($type,$type_id);
+?>
 <div style="width:600px">
-	<h2>You have <span class="color:green">approved</span> the completion of <{$item.title}>!</h2>
+	<h2>You have <span class="color:green">approved</span> the completion of <?php echo $item['title']?>!</h2>
 	<p>
 		Thank you very much!
 	</p>
