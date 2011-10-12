@@ -55,7 +55,7 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 
 			plugDataInto(into,id,query_id,vars);
 
-			if (replace) $('#'+type+'_id_'+vars.id).show('pulsate');
+			if (replace) $('#'+type+'_id_'+vars.id).effect('pulsate', { times: 3},250);
 
 		});
 	});
@@ -63,7 +63,7 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 
 function plugDataInto(into,id,query_id,vars)
 {
-	
+	console.log('Into: '+into);
 	// Parent id wrangling
 	parent_id = (into.substr(1,into.length));
 	widgets = parent_id.split(' ');
