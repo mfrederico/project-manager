@@ -1,16 +1,50 @@
-<?php print_pre($_SERVER['HTTP_USER_AGENT']); ?>
 <div id="container">
+	<?php if (!preg_match('/Android/i',$_SERVER['HTTP_USER_AGENT'])): ?>
+	<div id="status-view">
+		<div id="archive-view">
+			<h2 class="ui-state-default ui-corner-top" style="padding:3px;margin:0px;text-align:center">Out Box</h2>
+			<div id="archive"  style="border:1px solid black;height:inherit">
+				<div style="font-size:11px;text-align:center;margin-top:50%">Send stuff here to final approver</div>
+			</div>
+		</div>
+		<div id="update-view">
+			<h2 class="ui-state-default ui-corner-top" style="padding:3px;margin:0px;text-align:center">Updates Box</h2>
+			<div id="update"  style="border:1px solid black;height:inherit">
+				<div style="font-size:11px;text-align:center;margin-top:50%">Send project updates to approver</div>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?> 
     <div id="client-view">
 		<div id="main"></div>
 	</div>
-    <div id="archive-view">
-        <h2 class="ui-state-default ui-corner-top" style="padding:3px;margin:0px;text-align:center">Out Box</h2>
-        <div id="archive"  style="border:1px solid black;height:200px"><div style="font-size:11px;text-align:center;margin-top:50%">Drag stuff here for approval.</div></div>
-    </div>
 </div>
 <div id="dialog" class="ui-helper-hidden"></div>
 
 <script>
+	// Enable my update component
+    $('#update').droppable(
+    {
+        tolerance : 'pointer',
+        activeClass : "ui-state-active",
+        hoverClass  : "ui-state-highlight",
+		accept		: '.top',
+        drop: function(event,ui)
+        {
+            uiid = ui.draggable.attr('id');
+            dat = uiid.split('_');
+            widget = dat[0];
+            id = parseInt(dat[2]);
+			if (id > 0)
+			{
+				$.ajax({ url: 'index.php?action=sendupdate&type='+widget+'&'+widget+'_id='+id, dataType: 'json', success: function(data)
+				{
+					if (data['func'].length) eval(data['func']);
+				}});
+			}
+        }
+    });
+
 	// Enable my archive component
     $('#archive').droppable(
     {

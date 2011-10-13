@@ -24,7 +24,11 @@
 	ul		{ list-style-type:none;margin:0px;padding:0px;text-align:left;}
 	li		{ text-align:left;list-style-type:none;margin-left:0px;padding-left:0px;}
 
-	#container  	{display:block;padding-right:7px;float:left;text-align:left;width:900px;margin-top:7px;}
-	#archive-view 	{display:block;float:right;;width:200px}
+	#client-view	{display:block;float:left;width:100%;}
+	#container  	{display:block;padding-right:7px;float:left;text-align:left;width:100%;margin-top:7px;}
 	#future-view	{display:table-cell;width:400px}
-	#client-view	{display:block;float:left;width:680px;}
+
+	#status-view	{display:block:height:150px;}
+	#archive-view 	{width:200px;height:inherit;float:left;padding:7px}
+	#update-view 	{width:200px;height:inherit;float:left;padding:7px}
+
