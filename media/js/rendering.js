@@ -79,12 +79,12 @@ function plugDataInto(into,id,query_id,vars)
 	jQuery.each(vars,function(className,classVal)
 	{
 		//console.log("Class: "+className+' = '+classVal);
-		$(into).find(id+' .'+className).val(classVal);
-		$(into).find(id+' .'+className).text(classVal);
+		$(into).find(id+' .'+className+':first').val(classVal);
+		$(into).find(id+' .'+className+':first').text(classVal);
 	});
 	
 	// Append my id to all my href's in this section
-	$(into).find(id+' a').each(function(k,v)
+	$(into).find(id+' a.openboth:first,'+id+' a.editHandler:first').each(function(k,v)
 	{
 		$(this).attr('href',$(this).attr('href') + '&'+query_id);
 	});

@@ -24,7 +24,7 @@ $typeName = strtolower($type);
 		</fieldset>
 <?php if ($typeName == 'job') { ?>
 		<h2>Tasks</h2>
-			<?php foreach($tasks as $t): ?>
+			<?php if (count($tasks)) foreach($tasks as $t): ?>
 			<?php if ($i++ == 0) { ?>
 			<?php } ?>
 			<fieldset><legend><b><?php echo $t['title']?></b></legend>
@@ -40,7 +40,7 @@ $typeName = strtolower($type);
 			<?php endforeach?>
 
 		<h2>Notes</h2>
-			<?php foreach($notes as $n): ?>
+			<?php if (count($notes)) foreach($notes as $n): ?>
 			<?php if ($i++ == 0) { ?>
 			<?php } ?>
 			<fieldset><legend><b><?php echo $n['title']?></b></legend><?php echo $n['content']?></fieldset>

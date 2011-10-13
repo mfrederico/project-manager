@@ -43,10 +43,10 @@ function approval($d,$type,$item,$notes = array(),$tasks = array())
 
 	$uri = str_replace('action','page',$uri);
 	$uri = str_replace('archive','approve',$uri);
-	$approve_url = 'http://'.$_SERVER['SERVER_NAME'].$uri;
+	$approve_url = $d->config['url'].$uri;
 
 	$uri = str_replace('approve','decline',$uri);
-	$decline_url = 'http://'.$_SERVER['SERVER_NAME'].$uri;
+	$decline_url = $d->config['url'].$uri;
 
 	$type = rtrim(ucfirst($type),'s');
 	ob_start();
@@ -55,8 +55,6 @@ function approval($d,$type,$item,$notes = array(),$tasks = array())
 	ob_end_clean();
 
 	if (isset($_REQUEST['show'])) die($content);
-
-	$item['approveremail'] = 'mfrederi@adobe.com';
 
 	// DACI - should be "approver" for each task but lets short cut that for now:
 	if (!mail("{$item['approvername']} <{$item['approveremail']}>",
