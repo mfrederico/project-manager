@@ -11,6 +11,8 @@ if (isset($_REQUEST[$type]))
 {
 	$t = R::dispense($type);
 	$t->import($_REQUEST[$type]);
+	$t->updated = date('Y-m-d H:i:s');
+	if ($type_id > 0) $t->created = $t->updated;
 	$id = R::store($t);
 
 	$f = R::load($from,$_REQUEST[$from.'_id']);
@@ -26,6 +28,7 @@ if (isset($_REQUEST[$type]))
 
 */
 
+	// Replace the dom if we have a pre-existing update
 	$replace = ($type_id > 0) ? $type_id : '0';
 
     $msg = "{$type} #{$id} Saved.";

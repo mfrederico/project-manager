@@ -1,8 +1,8 @@
 <?php
 
 // Allows flexibility of archived to be displayed
-$arch		= (!empty($_REQUEST['arch'])) ? intval($_REQUEST['arch']) : 0;
-$approved	= (!empty($_REQUEST['approved'])) ? intval($_REQUEST['approved']) : 0;
+$arch		= (!empty($_REQUEST['arch'])) 	  ? 'NOT' : '';
+$approved	= (!empty($_REQUEST['approved'])) ? 'NOT' : '';
 
 // hard code this *for now*
 //if ($_REQUEST['type'] == 'clients' && !isset($_REQUEST['clients_id'])) $_REQUEST['clients_id'] = 1;
@@ -29,7 +29,7 @@ if (!isset($_REQUEST['new']))
 		// If we dont have a type specified
 		if (!$tid)
 		{	
-			$type	= R::related($from,$_REQUEST['type'],' archived=? AND approved=? ORDER BY `order`',array($arch,$approved));
+			$type	= R::related($from,$_REQUEST['type']," archived {$archived}='' AND approved {$approved}='' ORDER BY `order`");
 			foreach($type as $t) $data[$_REQUEST['type']][] = $t->export();
 		}
 		else

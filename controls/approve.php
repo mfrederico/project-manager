@@ -6,14 +6,13 @@ $type_id = $_REQUEST[$type.'_id'];
 if (isset($_REQUEST['type']))
 {
 	$item = R::load($type,$type_id);
-	$item->approved = 1;
+	$item->approved = date('Y-m-d H:i:s');
 	$id		= R::store($item);
 
-	$date = date('Y-m-d H:i:s');
 	$content = <<<__EOT__
 
 <h3>{$item['title']}</h3><pre>
-Date        : {$date}
+Date        : {$item['approved']}
 Description : {$item['content']}
 Approved by : {$item['approvername']} {$item['approveremail']}
 </pre>

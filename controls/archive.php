@@ -11,7 +11,7 @@ $tasks = '';
 if (isset($_REQUEST['type']))
 {
 	$j = R::load($type,$type_id);
-	$j->archived = 1;
+	$j->archived = date('Y-m-d H:i:s');;
     R::store($j);
 
 	$item = $j->export();
