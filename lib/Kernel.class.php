@@ -414,6 +414,8 @@ class Kernel
 			if (isset($_GET['layout'])) $this->setLayout($_GET['layout']);
 			if (isset($_GET['l'])) $this->setLayout($_GET['l']);
 			include($this->config['template_path'].$this->getLayout());
+			ob_implicit_flush();
+			ob_flush();
 			foreach($this->outputData as $k=>$v)
 			{
 				foreach($v as $page)
