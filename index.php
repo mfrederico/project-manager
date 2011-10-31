@@ -1,4 +1,12 @@
 <?php
+
+// Just in case you have magic quotes on .. lets turn it off
+if (get_magic_quotes_gpc()) {
+    function magicQuotes_awStripslashes(&$value, $key) {$value = stripslashes($value);}
+    $gpc = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+    array_walk_recursive($gpc, 'magicQuotes_awStripslashes');
+}
+
 if (!isset($_REQUEST['nogz'])) ob_start('ob_gzhandler');
 
 date_default_timezone_set('America/Los_Angeles');	// Change this to .. Whatever
