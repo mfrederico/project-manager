@@ -37,7 +37,7 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 		{
 			if (typeof tplData[type] == 'undefined')
 			{
-				tplData[type] = $.ajax({ url: 'media/templates/'+type+'_tpl.html', async: false }).responseText;
+				tplData[type] = $.ajax({ url: 'index.php?l=none&page='+type+'_tpl', async: false }).responseText;
 			}
 
 			if (!replace) $(into).append(tplData[type]);

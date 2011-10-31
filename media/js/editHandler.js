@@ -22,7 +22,7 @@
 
 		if (typeof tplData['edit'+type] == 'undefined')
 		{
-			tplData['edit'+type] = $.ajax({ url: 'media/templates/edit'+type+'_tpl.html', async: false }).responseText;
+			tplData['edit'+type] = $.ajax({ url: 'index.php?l=none&page=edit'+type+'_tpl', async: false }).responseText;
 		} 
 
 		$.getJSON($(obj).attr('href')+'&r=json',function(data)
