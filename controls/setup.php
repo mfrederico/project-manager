@@ -12,18 +12,22 @@ $c->order	= 1;
 
 $j->title	= 'First Job';
 $j->content	= 'More details';
+$j->archived= '';
 $j->order	= 1;
 
 $t->title	= 'First Task';
 $t->content	= 'More details';
+$j->archived= '';
 $t->order	= 1;
 
 $n->title	= 'First Note';
 $n->content	= 'More details';
+$j->archived= '';
 $n->order	= 1;
 
 $f->title	= 'First File';
 $f->content	= 'Path to file';
+$j->archived= '';
 $f->order	= 1;
 
 R::associate($c,$j);
