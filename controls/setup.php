@@ -7,27 +7,48 @@ $t = R::dispense('tasks');
 $n = R::dispense('notes');
 $f = R::dispense('files');
 
-$c->title	= 'First Client';
+$c->title	= 'Your Tasks';
 $c->order	= 1;
 
 $j->title	= 'First Job';
 $j->content	= 'More details';
 $j->archived= '';
+$j->approved= 0;
+$j->content = 'This is the content of your first job.  just a short description of what it is about. Set up tasks by clicking the task icon on the right.';
+$j->approvername = 'Approver';
+$j->approveremail= 'nobody@nowhere.com';
+$j->estimate		= '';
+$j->rate          = '';
+$j->updated       = date('Y-m-d H:i:s');
+$j->created		  = date('Y-m-d H:i:s');
 $j->order	= 1;
 
 $t->title	= 'First Task';
 $t->content	= 'More details';
-$j->archived= '';
+$t->archived= '';
+$t->approved= 0;
 $t->order	= 1;
+$t->content = 'This is a task, it lives inside your jobs.  These can also have approvers attached to them as well';
+$t->approvername = 'Approver';
+$t->approveremail= 'nobody@nowhere.com';
+$t->start		 = '';
+$t->finish		 = '';
+$t->rate          = '';
+$t->updated       = date('Y-m-d H:i:s');
+$t->created		  = date('Y-m-d H:i:s');
 
 $n->title	= 'First Note';
 $n->content	= 'More details';
-$j->archived= '';
+$n->archived= '';
+$n->approved= 0;
 $n->order	= 1;
+$n->updated       = date('Y-m-d H:i:s');
+$n->created		  = date('Y-m-d H:i:s');
 
 $f->title	= 'First File';
 $f->content	= 'Path to file';
-$j->archived= '';
+$f->archived= '';
+$f->approved= 0;
 $f->order	= 1;
 
 R::associate($c,$j);
