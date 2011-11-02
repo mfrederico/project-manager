@@ -133,6 +133,7 @@ blockquote {
 	left: 0;
 	width: 100%;	
 	height:24px;
+	z-index:2000;
 }
 
 
