@@ -92,11 +92,12 @@ blockquote {
 }
 
 #header ul {
+	float:left;
 	margin: 0;
-	padding: 0;
+	padding: 0px 2%;
 	list-style: none;
-	position: absolute;
-	top: 35px;
+	/* position: absolute;
+	/* top: 35px; */
 	right: 0;
 }
 
