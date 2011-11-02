@@ -1,6 +1,3 @@
-	body	{ font-family:arial;font-size:14px;background:white}
-	a		{ text-decoration: none; color:black;}
-
 	.clients{ background:#EFEFEF;text-align:left;margin-bottom:7px;clear:both;}
 	.options{ width:50px;text-align:left;float:right; }
 
@@ -25,12 +22,129 @@
 
 	ul		{ list-style-type:none;margin:0px;padding:0px;text-align:left;}
 	li		{ text-align:left;list-style-type:none;margin-left:0px;padding-left:0px;}
+	a		{ text-decoration: none; color:black;}
 
 	#client-view	{display:block;float:left;width:100%;}
-	#container  	{display:block;padding-right:7px;float:left;text-align:left;width:100%;margin-top:7px;}
 	#future-view	{display:table-cell;width:400px}
 
 	#status-view	{display:block:height:150px;}
 	#archive-view 	{width:200px;height:inherit;float:left;padding:7px}
 	#update-view 	{width:200px;height:inherit;float:left;padding:7px}
 
+body {
+	font: 62.5% Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2 {
+	font-family: Tahoma, Arial, Geneva, sans-serif;
+	margin: 20px 0 10px;
+}
+
+
+
+h1 {
+	font-size: 2.5em;
+}
+
+p {
+	margin: 10px 0;
+	padding: 0;
+}
+
+blockquote {
+	font-style: italic;	
+}
+
+#header-wrap {
+	z-index:2000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;	
+}
+
+#header-container {
+	height: 90px;
+}
+
+#header {
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+
+#header h1 {
+	text-align: right;
+	width: 290px;
+	margin: 0;
+	position: absolute;
+	left: 0;
+	top: 20px;
+}
+
+
+
+#header h1 em{
+	font-size: small;
+	display: block;
+}
+
+#header ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	top: 35px;
+	right: 0;
+}
+
+#header ul li {
+	float: left;
+	margin-right: 5px;
+}
+
+#header ul li a{
+	font-weight: bold;
+	font-size: 1.4em;
+	margin-right: 5px;
+	text-decoration: none;
+}
+
+#container {
+	width: 100%;
+	margin: 0 auto;
+	font-size: 1.4em;
+	overflow: auto;
+	padding: 10px 0 40px;
+}
+
+#sidebar {
+	float: right;
+	width: 275px;
+	margin-top: 10px;
+}
+
+#footer-wrap {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;	
+	height:24px;
+}
+
+
+
+#footer-container {
+	height: 40px;
+	display:block;
+	border:1px solid black;
+	background:#CDCDCD;
+}
+
+#footer {
+	width: 100%;
+	margin: 0 auto;
+	position: relative;
+}
