@@ -75,7 +75,7 @@ class Kernel
 			//include_once($this->lib.'/norm.php');
 			//$this->DB = new Norm("{$this->config['db']['type']}:host={$this->config['db']['host']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
 			include_once($this->lib.'/rb.php');
-			$this->DB = R::setup("{$this->config['db']['type']}:host={$this->config['db']['host']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
+			$this->DB = R::setup("{$this->config['db']['type']}:host={$this->config['db']['host']};port={$this->config['db']['port']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
 		}
 
 		// Load configuration Data

@@ -48,9 +48,15 @@
 				d[parentType+'_id'] = (parentId > 0) ? parentId : 'x';
 			}
 
+			// Set our maximum dialog window width
+			thisW = $(window).width() - 20;
+			if (thisW  > 600) thisW = 600;
+
+			thisH = $(window).height() - 100;
+
 			$("#dialog").html(tplData['edit'+type]).dialog(
 			{
-				width:600,height:600,modal: false,resizable:false,draggable:true, title: d_title,autoOpen: true,buttons: 
+				width:thisW,height:thisH,modal: true,resizable:false,draggable:true, title: d_title,autoOpen: true,buttons: 
 				{ 
 					"OK": function() 
 					{ 

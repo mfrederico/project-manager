@@ -3,9 +3,12 @@
 
 	.label	{ text-align:left;padding:7px;font-weight:bold}
 	.label small	{ text-align:left;padding:7px;font-weight:normal}
+	.title	{ font-size: 12px;padding:7px;}
 
-	.jobs_widget  {margin-bottom:7px;line-height:12px; padding:0px;} 
+	.jobs_widget  {margin-bottom:7px;padding:0px;} 
 	.jobs_widget .content {overflow:hide;font-size:11px;display:block;}
+	.jobs_widget .title {padding:7px;margin:7px;}
+	.jobs_widget .approvername {float:right;}
 
 	.notes  { text-decoration:none;list-style-type:none;text-indent:0px;}
 	.notes_widget  { margin-left:10px; padding:0px;width:90%;}
@@ -20,6 +23,7 @@
 	.date	{ font-size:12px;padding:7px;background:#EFEFEF;clear:both;padding:7px;height:13px}
 	.desc	{ font-size:13px;border:1px solid #CDCDCD;padding:7px;background:#CDCDCD;color:black;font-weight:normal}
 
+	table	{ margin:0px}
 	ul		{ list-style-type:none;margin:0px;padding:0px;text-align:left;}
 	li		{ text-align:left;list-style-type:none;margin-left:0px;padding-left:0px;}
 	a		{ text-decoration: none; color:black;}
@@ -32,7 +36,7 @@
 	#update-view 	{width:200px;height:inherit;float:left;padding:7px}
 
 body {
-	font: 62.5% Arial, Helvetica, sans-serif;
+	font: 12px Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
 }
@@ -77,7 +81,7 @@ blockquote {
 
 #header h1 {
 	text-align: right;
-	width: 290px;
+	width: 25%;
 	margin: 0;
 	position: absolute;
 	left: 0;
@@ -108,7 +112,7 @@ blockquote {
 
 #header ul li a{
 	font-weight: bold;
-	font-size: 1.4em;
+	font-size: 11px;
 	margin-right: 5px;
 	text-decoration: none;
 }
@@ -116,14 +120,14 @@ blockquote {
 #container {
 	width: 100%;
 	margin: 0 auto;
-	font-size: 1.4em;
+	font-size: 11px;
 	overflow: auto;
 	padding: 10px 0 40px;
 }
 
 #sidebar {
 	float: right;
-	width: 275px;
+	width: 25%;
 	margin-top: 10px;
 }
 
