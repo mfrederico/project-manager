@@ -17,7 +17,7 @@
 	.tasks  { text-decoration:none;list-style-type:none;text-indent:0px;}
 	.tasks_widget  { margin-left:10px; padding:0px;width:90%;}
 
-	/* Fudges for aristo .. */
+	/* Little Fudges for aristo .. */
     .ui-datepicker-title { padding-bottom:10px} 
 
 	.date	{ font-size:12px;padding:7px;background:#EFEFEF;clear:both;padding:7px;height:13px}
