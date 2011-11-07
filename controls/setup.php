@@ -1,5 +1,5 @@
 <?php
-die('already done!');
+//die('already done!');
 
 $c = R::dispense('clients');
 $j = R::dispense('jobs');
