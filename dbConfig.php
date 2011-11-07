@@ -6,10 +6,6 @@
 /* Database Configuration */
 $DB_PREFIX='';
 
-	$envjson = json_decode(file_get_contents("/home/dotcloud/environment.json"),true);
-	print_pre($envjson);
-	die();
-
 $this->config['db']['database']   = 'ultrizec_ts4';
 $this->config['db']['user']       = 'ultrizec';
 $this->config['db']['pass']       = '3v4n4j4n3';
@@ -23,8 +19,13 @@ if (preg_match('/ultrize.com/',$_SERVER['SERVER_NAME']))
 elseif(preg_match('/dotcloud.com/',$_SERVER['SERVER_NAME']))
 {
 	$envjson = json_decode(file_get_contents("/home/dotcloud/environment.json"),true);
-	print_pre($envjson);
-	die();
+	list($db,$user,$pass) = explode(':',$envjson);
+	$user = str_replace('//','',$user);
+	list($pass,$user) = explode('@',$pass);
+
+	$this->config['db']['user']       = $user;
+	$this->config['db']['pass']       = $pass;
+
     $this->config['db']['host']       = $envjson['DOTCLOUD_DB_MYSQL_HOST'];
     $this->config['db']['port']       = $envjson['DOTCLOUD_DB_MYSQL_PORT'];
 }
