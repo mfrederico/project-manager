@@ -6,6 +6,10 @@
 /* Database Configuration */
 $DB_PREFIX='';
 
+	$envjson = json_decode(file_get_contents("/home/dotcloud/environment.json"),true);
+	print_pre($envjson);
+	die();
+
 $this->config['db']['database']   = 'ultrizec_ts4';
 $this->config['db']['user']       = 'ultrizec';
 $this->config['db']['pass']       = '3v4n4j4n3';
