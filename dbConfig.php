@@ -19,6 +19,8 @@ if (preg_match('/ultrize.com/',$_SERVER['SERVER_NAME']))
 elseif(preg_match('/dotcloud.com/',$_SERVER['SERVER_NAME']))
 {
 	$envjson = json_decode(file_get_contents("/home/dotcloud/environment.json"),true);
+	print_pre($envjson);
+	die();
     $this->config['db']['host']       = $envjson['DOTCLOUD_DB_MYSQL_HOST'];
     $this->config['db']['port']       = $envjson['DOTCLOUD_DB_MYSQL_PORT'];
 }
