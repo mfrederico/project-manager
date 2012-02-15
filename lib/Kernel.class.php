@@ -44,10 +44,11 @@ class Kernel
 
 
 	//..... Output Data
-	var $outputData	= array();
-	var $pageTitle	= '';
-	var $redirect	= '';
-	var $layout		= '';
+	var $outputData		= array();
+	var $pageTitle		= '';
+	var $redirect		= '';
+	var $layout			= '';
+	var $layoutFooter	= '';
 
 
 	//..... Error array
@@ -75,7 +76,14 @@ class Kernel
 			//include_once($this->lib.'/norm.php');
 			//$this->DB = new Norm("{$this->config['db']['type']}:host={$this->config['db']['host']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
 			include_once($this->lib.'/rb.php');
-			$this->DB = R::setup("{$this->config['db']['type']}:host={$this->config['db']['host']};port={$this->config['db']['port']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
+			if ($this->config['db']['type'] != 'sqlite')
+			{
+				$this->DB = R::setup("{$this->config['db']['type']}:host={$this->config['db']['host']};port={$this->config['db']['port']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
+			}
+			else 
+			{
+				$this->DB = R::setup("{$this->config['db']['type']}:{$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
+			}
 		}
 
 		// Load configuration Data
@@ -396,8 +404,21 @@ class Kernel
 	function setLayout($layout)
 	{
 		$layout = basename($layout);
-		if ($layout) $this->layout = "layouts/{$layout}.html";
-		else $this->layout = '';
+		if ($layout) 
+		{
+			$this->layout = "layouts/{$layout}.html";
+			$this->layoutFooter = "layouts/{$layout}_footer.html";
+		}
+		else 
+		{
+			$this->layout = '';
+		}
+	}
+
+	function getLayoutFooter()
+	{
+		if (isset($this->layoutFooter) && strlen($this->layoutFooter)) return($this->layoutFooter);
+		else return('layouts/passthrough.html');
 	}
 
 	function getLayout()
@@ -411,8 +432,10 @@ class Kernel
 		//..... USUALLY comes from a page -- display
 		if ($this->controlType == 'page' OR $this->controlType == 'part')
 		{
+			header("Content-Type: text/html; Charset=UTF-8");
 			if (isset($_GET['layout'])) $this->setLayout($_GET['layout']);
 			if (isset($_GET['l'])) $this->setLayout($_GET['l']);
+
 			include($this->config['template_path'].$this->getLayout());
 			ob_implicit_flush();
 			ob_flush();
@@ -424,6 +447,7 @@ class Kernel
 					include($page);
 				}
 			}
+			include($this->config['template_path'].$this->getLayoutFooter());
 		}
 		//...... USUALLY comes from an action or no display
 		if (strlen($this->redirect))	

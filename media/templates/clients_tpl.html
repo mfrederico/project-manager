@@ -1,23 +1,23 @@
+<!--
 <style>
 	.ui-tabs .tab 	{ font-size:10px;}
 	.ui-tabs .ui-widget-header { background:none;} 
 	.ui-corner-all  { border:0px}
 	.ui-widget		{font-family: arial;font-size:12px;}
 </style>
+-->
 
 <div id="clients_id_1" class="clients_widget top" data-role="content">
-
 	<div class="ui-state-default label">
 		<!-- a class="ui-button ui-icon ui-icon-triangle-1-e default" name="jobs" target=".jobs" href="index.php?action=get&from=clients&clients_id=1" title="open/close job list"></a -->
-		<a class="editHandler title" href="index.php?action=get&type=clients&clients_id=1&r=form">Loading ... </a>
 		<span class="options"><a class="editHandler ui-button ui-icon ui-icon-suitcase" href="index.php?action=get&type=jobs&from=clients&clients_id=1&new=1" title="Add new job">+JOB</a></span>
+		<a class="editHandler title" href="index.php?action=get&type=clients&clients_id=1&r=form">Loading ... </a>
 	</div>
-
 	<div id="tabs-1"><ul class="sortable jobs"></ul></div>
 	<!-- <div id="tabs-2"><ul class="sortable approval">approved tasks</ul></div>
 	<div id="tabs-3"><ul class="sortable completed">completed tasks</ul></div> -->
 <div>
-<script>
+<script type="text/javascript">
 	$(function()
 	{
 		getDataFor('#'+$('.clients_widget').attr('id')+' .jobs','jobs','','clients','1');

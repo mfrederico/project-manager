@@ -13,7 +13,7 @@ $c->order	= 1;
 $j->title	= 'First Job';
 $j->content	= 'More details';
 $j->archived= '';
-$j->approved= 0;
+$j->approved= '0';
 $j->content = 'This is the content of your first job.  just a short description of what it is about. Set up tasks by clicking the task icon on the right.';
 $j->approvername = 'Approver';
 $j->approveremail= 'nobody@nowhere.com';
@@ -26,7 +26,7 @@ $j->order	= 1;
 $t->title	= 'First Task';
 $t->content	= 'More details';
 $t->archived= '';
-$t->approved= 0;
+$t->approved= '0';
 $t->order	= 1;
 $t->content = 'This is a task, it lives inside your jobs.  These can also have approvers attached to them as well';
 $t->approvername = 'Approver';
@@ -40,7 +40,7 @@ $t->created		  = date('Y-m-d H:i:s');
 $n->title	= 'First Note';
 $n->content	= 'More details';
 $n->archived= '';
-$n->approved= 0;
+$n->approved= '0';
 $n->order	= 1;
 $n->updated       = date('Y-m-d H:i:s');
 $n->created		  = date('Y-m-d H:i:s');
@@ -48,8 +48,24 @@ $n->created		  = date('Y-m-d H:i:s');
 $f->title	= 'First File';
 $f->content	= 'Path to file';
 $f->archived= '';
-$f->approved= 0;
+$f->approved= '0';
 $f->order	= 1;
+
+/*
+$t->files[]	= $f;
+$t->notes[]	= $n;
+R::store($t);
+
+$j->tasks[]	= $t;
+$j->files[]	= $f;
+$j->notes[]	= $n;
+R::store($j);
+
+$c->jobs[]	= $j;
+$c->notes[]	= $n;
+$c->files[]	= $f;
+R::store($c);
+*/
 
 R::associate($c,$j);
 R::associate($c,$f);
@@ -89,5 +105,5 @@ $c->jobs->tasks->rate			= $c->jobs->rate;
 $this->DB->store($c);
 */
 
-print "<h2>Finished.</h2>";
+header("Location: index.php");
 ?>

@@ -1,14 +1,11 @@
-	body	{ font-family:arial;font-size:30px;background:white}
-	a		{ text-decoration: none; color:black;}
+	body	{ font-family: verdana,arial;}
 
-	.clients{ background:#EFEFEF;text-align:left;margin-bottom:7px;clear:both;}
-	.options{ width:50px;text-align:left;float:right; }
+	.clients_widget { width:100%}
 
-	.label	{ text-align:left;padding:7px;font-weight:bold;display:none}
-	.label small	{ text-align:left;padding:7px;font-weight:normal}
-
-	.jobs_widget  {margin-bottom:7px;line-height:12px; padding:0px;} 
+	.jobs_widget  {margin-bottom:7px;padding:0px;border:1px solid black;} 
+	.jobs_widget .title {padding:7px;margin:7px;border:1px solid black;}
 	.jobs_widget .content {overflow:hide;font-size:11px;display:block;}
+	.jobs_widget .approvername {overflow:hide;display:block;}
 
 	.notes  { text-decoration:none;list-style-type:none;text-indent:0px;}
 	.notes_widget  { margin-left:10px; padding:0px;width:90%;}
@@ -17,18 +14,145 @@
 	.tasks  { text-decoration:none;list-style-type:none;text-indent:0px;}
 	.tasks_widget  { margin-left:10px; padding:0px;width:90%;}
 
+	/* Little Fudges for aristo .. */
+    .ui-datepicker-title { padding-bottom:10px} 
 
-	.date	{ font-size:11px;padding:7px;background:#EFEFEF;clear:both;padding:7px;height:13px}
+	.date	{ font-size:12px;padding:7px;background:#EFEFEF;clear:both;padding:7px;height:13px}
 	.desc	{ font-size:13px;border:1px solid #CDCDCD;padding:7px;background:#CDCDCD;color:black;font-weight:normal}
 
+	table	{ margin:0px}
 	ul		{ list-style-type:none;margin:0px;padding:0px;text-align:left;}
 	li		{ text-align:left;list-style-type:none;margin-left:0px;padding-left:0px;}
+	a		{ text-decoration: none; color:black;}
 
 	#client-view	{display:block;float:left;width:100%;}
-	#container  	{display:block;padding-right:7px;float:left;text-align:left;width:100%;margin-top:7px;}
-	#future-view	{display:table-cell;width:400px}
 
 	#status-view	{display:block:height:150px;}
-	#archive-view 	{width:200px;height:inherit;float:left;padding:7px}
-	#update-view 	{width:200px;height:inherit;float:left;padding:7px}
+	#archive		{height:inherit;width:10%;float:left;margin-left:10px;}
+	#archive.drop	{font-size:11px;text-align:center;line-height:0px}
+	#version		{float:right;border:1px solid black;}
 
+    .orange { color: orange}
+    .logo   { color:black;text-align:left;padding-left:20px;height:40px;font-size:25px;float:left;}
+    #menu   { width:100%;clear:both;height:30px;}
+    .menu-list  { padding-left:30px;float:left;line-height:30px;};
+
+
+body {
+	font: 12px Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2 {
+	font-family: Tahoma, Arial, Geneva, sans-serif;
+	margin: 20px 0 10px;
+}
+
+
+
+h1 {
+	font-size: 2.5em;
+}
+
+p {
+	margin: 10px 0;
+	padding: 0;
+}
+
+blockquote {
+	font-style: italic;	
+}
+
+#header-wrap {
+	z-index:2000;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#header-container {
+	height: 40px;
+}
+
+#header {
+	margin: 0 auto;
+	position: relative;
+}
+
+#header h1 {
+	text-align: right;
+	margin: 0;
+	position: absolute;
+	left: 0;
+	top: 20px;
+}
+
+
+
+#header h1 em{
+	font-size: small;
+	display: block;
+}
+
+#header ul {
+	float:left;
+	margin: 0;
+	padding: 0px 2%;
+	list-style: none;
+	/* position: absolute;
+	/* top: 35px; */
+	right: 0;
+}
+
+#header ul li {
+	float: left;
+	margin-right: 5px;
+}
+
+#header ul li a{
+	font-weight: bold;
+	font-size: 11px;
+	margin-right: 5px;
+	text-decoration: none;
+}
+
+#container {
+	width: 100%;
+	margin: 0 auto;
+	font-size: 11px;
+	overflow: auto;
+	padding: 10px 0 40px;
+}
+
+#sidebar {
+	float: right;
+	width: 25%;
+	margin-top: 10px;
+}
+
+#footer-wrap {
+	display:none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;	
+	height:24px;
+	z-index:2000;
+}
+
+
+
+#footer-container {
+	height: 40px;
+	display:block;
+	border:1px solid black;
+	background:#CDCDCD;
+}
+
+#footer {
+	width: 100%;
+	margin: 0 15px;
+	position: relative;
+	line-height:1.7em;
+}

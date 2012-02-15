@@ -33,31 +33,34 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 
 	$.getJSON('index.php?action=get&'+url+'&r=json',function(data,ui)
 	{
-		$(data[type]).each(function(k,vars)
+		if (data != null)
 		{
-			if (typeof tplData[type] == 'undefined')
+			$(data[type]).each(function(k,vars)
 			{
-				tplData[type] = $.ajax({ url: 'index.php?l=none&page='+type+'_tpl', async: false }).responseText;
-			}
+				if (typeof tplData[type] == 'undefined')
+				{
+					tplData[type] = $.ajax({ url: 'index.php?l=none&page='+type+'_tpl', async: false }).responseText;
+				}
 
-			if (!replace) $(into).append(tplData[type]);
+				if (!replace) $(into).append(tplData[type]);
 
-			$(into).find('#'+type).attr('id',type+'_id_'+vars.id);
+				$(into).find('#'+type).attr('id',type+'_id_'+vars.id);
 
-			id = '#'+type+'_id_'+vars.id;
-			query_id = type+'_id='+vars.id;
+				id = '#'+type+'_id_'+vars.id;
+				query_id = type+'_id='+vars.id;
 
-			$(id).parent().sortable(
-			{
-				connectWith: '#past',
-				items: '.'+type+'_widget',
+				$(id).parent().sortable(
+				{
+					connectWith: '#past',
+					items: '.'+type+'_widget',
+				});
+
+				plugDataInto(into,id,query_id,vars);
+
+				if (replace) $('#'+type+'_id_'+vars.id).effect('pulsate', { times: 3},250);
+
 			});
-
-			plugDataInto(into,id,query_id,vars);
-
-			if (replace) $('#'+type+'_id_'+vars.id).effect('pulsate', { times: 3},250);
-
-		});
+		}
 	});
 }
 
@@ -84,9 +87,10 @@ function plugDataInto(into,id,query_id,vars)
 	});
 	
 	// Append my id to all my href's in this section
-	$(into).find(id+' a.openboth:first,'+id+' a.editHandler:first').each(function(k,v)
+	$(into).find(id+' a.openboth:first,'+id+' .editHandler').each(function(k,v)
 	{
 		$(this).attr('href',$(this).attr('href') + '&'+query_id);
+		//console.log('Appending ids: '+v  + ' ' + query_id);
 	});
 }
 

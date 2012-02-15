@@ -10,7 +10,6 @@ $approved	= (!empty($_REQUEST['approved'])) ? 'NOT' : '';
 // Get an object from the DB, and its acompanying template -> json array of each in it's template
 $rendered = false;
 
-
 // Gets the from object's types
 if (!isset($_REQUEST['new']))
 {
@@ -22,6 +21,7 @@ if (!isset($_REQUEST['new']))
 
 	if (!empty($_REQUEST['from']))
 	{
+		//R::debug(true);
 
 		$from		= R::load($_REQUEST['from'],intval($fid));
 		$data[$_REQUEST['from']] = $from->export();;
@@ -29,23 +29,27 @@ if (!isset($_REQUEST['new']))
 		// If we dont have a type specified
 		if (!$tid)
 		{	
-			$type	= R::related($from,$_REQUEST['type']," archived {$archived}='' AND approved {$approved}='' ORDER BY `order`");
+			$type	= R::related($from,$_REQUEST['type']," archived {$archived}='' AND approved {$approved}='0' ORDER BY `order`");
 			foreach($type as $t) $data[$_REQUEST['type']][] = $t->export();
 		}
 		else
 		{
-			$b = $this->DB->findOne($_REQUEST['type'],' id=? ',array($tid));
+			$b = R::findOne($_REQUEST['type'],' id=? ',array($tid));
 			$data[$_REQUEST['type']][] = $b->export();
 		}
 	}
 	// Gets just the object type (with id)
 	else
 	{
-		$b = $this->DB->findOne($_REQUEST['type'],' id=? ',array($tid));
-		$data[$_REQUEST['type']][] = $b->export();
+		$b = R::findOne($_REQUEST['type'],' id=? ',array($tid));
+		if ($b)
+		{
+			$data[$_REQUEST['type']][] = $b->export();
+		}
 	}
 }
 
+//print_pre($data);
 print json_encode($data);
 
 ?>

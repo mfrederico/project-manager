@@ -5,7 +5,7 @@
 </div>
 <div id="dialog" class="ui-helper-hidden"></div>
 
-<script>
+<script type="text/javascript">
 	// Enable my update component
     $('#update').droppable(
     {
@@ -21,7 +21,7 @@
             id = parseInt(dat[2]);
 			if (id > 0)
 			{
-				$.ajax({ url: 'index.php?action=sendupdate&type='+widget+'&'+widget+'_id='+id, dataType: 'json', success: function(data)
+				$.ajax({ url: 'index.php?action=sendupdate&amp;type='+widget+'&amp;'+widget+'_id='+id, dataType: 'json', success: function(data)
 				{
 					if (data['func'].length) eval(data['func']);
 				}});
@@ -44,7 +44,7 @@
             id = parseInt(dat[2]);
 			if (id > 0)
 			{
-				$.ajax({ url: 'index.php?action=archive&type='+widget+'&'+widget+'_id='+id, dataType: 'json', success: function(data)
+				$.ajax({ url: 'index.php?action=archive&amp;type='+widget+'&amp;'+widget+'_id='+id, dataType: 'json', success: function(data)
 				{
 					if (data['func'].length) eval(data['func']);
 				}});
