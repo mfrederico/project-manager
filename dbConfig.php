@@ -19,6 +19,8 @@ if (preg_match('/ultrize.com/',$_SERVER['SERVER_NAME']))
 elseif(preg_match('/dotcloud.com/',$_SERVER['SERVER_NAME']))
 {
 	$envjson = json_decode(file_get_contents("/home/dotcloud/environment.json"),true);
+	print_pre($envjson);
+	die();
 	list($db,$user,$pass) = explode(':',$envjson);
 	$user = str_replace('//','',$user);
 	list($pass,$user) = explode('@',$pass);
