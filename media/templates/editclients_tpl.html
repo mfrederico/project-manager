@@ -1,18 +1,19 @@
 <style>
-label { width:5em;display:block:float:left}
+  .timeestimates { line-height:2.0em;margin-left:7px;}
+  .timeestimates label {width:100px; ;display:block;float:left;}
 </style>
 <form method="POST" action="index.php" id="editForm" class="clients">
 <input type="hidden" name="action" value="save">
 <input type="hidden" name="type" value="clients">
+<input type="hidden" name="from" value="clients">
+<input type="hidden" name="clients_id" value="" class="clients_id">
 <input type="hidden" name="clients[archived]" class="archived" value="0">
 <input type="hidden" name="clients[approved]" class="approved" value="0">
 <input type="hidden" name="clients[id]" class="id" value="">
-<label for="title">Title:</label>
-<input type="text" name="clients[title]" class="title" value=""><Br />
-Time Estimate: 
-<input type="text" name="clients[estimate]" class="estimate" value=""> hrs<Br />
-Rate: 
-<input type="text" name="clients[rate]" class="rate" value=""> <Br />
-Description: <br />
-<textarea name="clients[content]" class="content" style="width:97%;height:200px"></textarea><Br />
+<h4 style="padding:0px;margin:0px;">Title:</h4>
+<input type="text" name="clients[title]" class="title" style="width:97%" value=""><Br />
+<h4 style="padding:0px;margin:0px;">Details:</h4>
+Time Estimate: <input type="text" name="clients[estimate]" class="estimate" size="3" value=""> hrs @ Rate: <input type="text" class="rate" size="5" name="clients[rate]" value=""> <Br />
+Description:
+<textarea name="clients[content]" class="content" style="width:100%;height:200px;margin:auto;"></textarea><Br />
 </form>

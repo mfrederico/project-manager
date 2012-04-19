@@ -1,5 +1,5 @@
 	body	{ font-family: verdana,arial;font-size:12px;margin:0px;padding:0px}
-	.clients{ background:#EFEFEF;text-align:left;margin-bottom:7px;clear:both;}
+	.clients{ text-align:left;margin-bottom:7px;clear:both;}
 	.options{ width:50px;text-align:left;}
 
 	.label	{ text-align:left;padding:7px;font-weight:bold}

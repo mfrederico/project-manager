@@ -9,6 +9,7 @@ function renderObj(href,type,target,replace)
 	var hrefqs = getURLParams(href);
 	getDataFor(target,type,hrefqs[hrefqs['type']+'_id'],hrefqs['from'],hrefqs[hrefqs['from']+'_id'],replace);
 } 
+//renderObj('index.php?action=get&from=clients&clients_id=1&type=clients&clients_id=1','clients','#clients_id_1 .clients',1);
 
 function getDataFor(into,type,type_id,from,from_id,replace)
 {

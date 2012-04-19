@@ -30,6 +30,13 @@ if (!isset($_REQUEST['new']))
 			$type	= R::related($from,$_REQUEST['type']," archived {$archived}='' AND approved {$approved}='0' ORDER BY `order`");
 			foreach($type as $t) $data[$_REQUEST['type']][] = $t->export();
 		}
+    // If we are updating a specific "top object"
+    elseif ($_REQUEST['from'] == $_REQUEST['type'])
+    {
+			$b = R::findOne($_REQUEST['type'],' id=? ',array($tid));
+			$data[$_REQUEST['type']] = $b->export();
+    }
+    // If we are updating a heirarchy
 		else
 		{
 			$b = R::findOne($_REQUEST['type'],' id=? ',array($tid));

@@ -20,6 +20,7 @@ if (isset($_REQUEST[$type]))
 	R::associate($f,$t);
 
 /*
+  // This is supposed to run all callbacks after save
 	if (function_exists('onaftersave_'.$_REQUEST['type'])) 
 	{
 		$func = "onaftersave_{$_REQUEST['type']}";
@@ -28,11 +29,19 @@ if (isset($_REQUEST[$type]))
 
 */
 
-	// Replace the dom if we have a pre-existing update
+	// Replace the dom if we have a pre-existing node
 	$replace = ($type_id > 0) ? $type_id : '0';
 
-    $msg = "{$type} #{$id} Saved.";
-	$returnFunc = "renderObj('index.php?action=get&from={$from}&{$from}_id={$from_id}&type={$type}&{$type}_id={$id}','{$type}','#{$from}_id_{$from_id} .{$type}',$replace);";
+  $msg = "{$type} #{$id} Saved.";
+  if ($type == $from) 
+  {
+    $target = "#main_{$type}";
+  }
+  else
+  {
+    $target = "#{$from}_id_{$from_id}";
+  } 
+	$returnFunc = "renderObj('index.php?action=get&from={$from}&{$from}_id={$from_id}&type={$type}&{$type}_id={$id}','{$type}','{$target} .{$type}',$replace);";
 	//$returnFunc = "refresh('#{$type}_id_{$_REQUEST[$type]['id']}');";
 }
 
