@@ -15,7 +15,7 @@ $config['template_cache_dir']	= $this->cwd.'/data/';
 $config['template_path']		= 'media/templates/';
 
 $config['user_name']			= 'Matthew Frederico';
-$config['user_email']			= 'mfrederi@adobe.com';
-$config['url']					= 'http://10.12.160.85/';
+$config['user_email']			= 'mfrederico@gmail.com';
+$config['url']					= 'http://www.ultrize.com';
 
 ?>

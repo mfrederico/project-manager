@@ -21,7 +21,7 @@
             id = parseInt(dat[2]);
 			if (id > 0)
 			{
-				$.ajax({ url: 'index.php?action=sendupdate&amp;type='+widget+'&amp;'+widget+'_id='+id, dataType: 'json', success: function(data)
+				$.ajax({ url: 'index.php?action=sendupdate&type='+widget+'&'+widget+'_id='+id, dataType: 'json', success: function(data)
 				{
 					if (data['func'].length) eval(data['func']);
 				}});
@@ -42,13 +42,31 @@
             dat = uiid.split('_');
             widget = dat[0];
             id = parseInt(dat[2]);
-			if (id > 0)
-			{
-				$.ajax({ url: 'index.php?action=archive&amp;type='+widget+'&amp;'+widget+'_id='+id, dataType: 'json', success: function(data)
-				{
-					if (data['func'].length) eval(data['func']);
-				}});
-			}
+
+			archiveThis(widget,id);
         }
     });
+
+
+    // Enable my archive checkbox
+    $("body").on('click','.completed',function(event)
+    {
+		uiid = $(this).closest('.top').attr('id');
+		dat = uiid.split('_');
+		widget = dat[0];
+		id = parseInt(dat[2]);
+		archiveThis(widget,id);
+    });
+
+	function archiveThis(widget,id)
+	{
+        if (id > 0)
+        {
+            $.ajax({ url: 'index.php?action=archive&type='+widget+'&'+widget+'_id='+id, dataType: 'json', success: function(data)
+            {
+                if (data['func'].length) eval(data['func']);
+            }});
+        }
+	}
+
 </script>

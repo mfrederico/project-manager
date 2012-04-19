@@ -1,14 +1,17 @@
+<style>
+label { width:5em;display:block:float:left}
+</style>
 <form method="POST" action="index.php" id="editForm" class="clients">
 <input type="hidden" name="action" value="save">
 <input type="hidden" name="type" value="clients">
 <input type="hidden" name="clients[archived]" class="archived" value="0">
 <input type="hidden" name="clients[approved]" class="approved" value="0">
 <input type="hidden" name="clients[id]" class="id" value="">
-Title: <br />
+<label for="title">Title:</label>
 <input type="text" name="clients[title]" class="title" value=""><Br />
-Time Estimate: <br />
+Time Estimate: 
 <input type="text" name="clients[estimate]" class="estimate" value=""> hrs<Br />
-Rate: <br />
+Rate: 
 <input type="text" name="clients[rate]" class="rate" value=""> <Br />
 Description: <br />
 <textarea name="clients[content]" class="content" style="width:97%;height:200px"></textarea><Br />

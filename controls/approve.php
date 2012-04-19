@@ -19,7 +19,7 @@ Approved by : {$item['approvername']} {$item['approveremail']}
 
 __EOT__;
 
-    if (!mail("{$this->config['user_name']} <{$this->config['user_email']}>",'MattTask: '.$item['title'].' has been approved!',$content,"Content-Type: text/html\nFrom: {$item['approvername']} <{$item['approveremail']}>")) die('Cannot send approval email!');
+    if (!mail("{$this->config['user_name']} <{$this->config['user_email']}>",'Taskf.ly: '.$item['title'].' has been approved!',$content,"Content-Type: text/html\nFrom: {$item['approvername']} <{$item['approveremail']}>")) die('Cannot send approval email!');
 
 }
 

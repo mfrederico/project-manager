@@ -73,16 +73,17 @@ class Kernel
 		if (file_exists($dbConfig))
 		{
 			include($dbConfig);
-			//include_once($this->lib.'/norm.php');
-			//$this->DB = new Norm("{$this->config['db']['type']}:host={$this->config['db']['host']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
-			include_once($this->lib.'/rb.php');
-			if ($this->config['db']['type'] != 'sqlite')
+			if (isset($this->config['db']['type']))
 			{
-				$this->DB = R::setup("{$this->config['db']['type']}:host={$this->config['db']['host']};port={$this->config['db']['port']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
-			}
-			else 
-			{
-				$this->DB = R::setup("{$this->config['db']['type']}:{$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
+				include_once($this->lib.'/rb.php');
+				if ($this->config['db']['type'] != 'sqlite')
+				{
+					$this->DB = R::setup("{$this->config['db']['type']}:host={$this->config['db']['host']};port={$this->config['db']['port']};dbname={$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
+				}
+				else 
+				{
+					$this->DB = R::setup("{$this->config['db']['type']}:{$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
+				}
 			}
 		}
 
@@ -144,7 +145,10 @@ class Kernel
 
 	function setupClasses()
 	{
-		if (isset($_REQUEST['dbg'])) $this->SMARTY->debugging     = true;
+		if (isset($_REQUEST['dbg'])) 
+    {
+      $this->SMARTY->debugging     = true;
+    }
 		$this->origCid                  = $this->SMARTY->compile_id;
 
 		return($this);

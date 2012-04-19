@@ -1,4 +1,4 @@
-	body	{ font-family: verdana,arial;font-size:12px}
+	body	{ font-family: verdana,arial;font-size:12px;margin:0px;padding:0px}
 	.clients{ background:#EFEFEF;text-align:left;margin-bottom:7px;clear:both;}
 	.options{ width:50px;text-align:left;}
 
@@ -6,25 +6,26 @@
 	.label small	{ text-align:left;padding:7px;font-weight:normal}
 	.title	{ font-size: 12px;padding:7px;}
 
+	.openboth	{ padding-top:-20px;padding-left:.5em}
 
 	.clients_widget { width:100%}
 
-	.jobs_widget  {margin-bottom:7px;margin-top:.5em;padding-bottom:.5em;border:1px solid black;background:#EFEFEF} 
+	.jobs_widget  {margin-bottom:7px;margin-top:.2em;padding-bottom:.2em;border:1px solid #DDDDDD;background:#EFEFEF} 
 	.jobs_widget .title {padding:7px;margin:7px;}
 	.jobs_widget .content {overflow:hide;font-size:11px;display:block;}
 	.jobs_widget .approvername {overflow:hide;display:block;}
 	.jobs_widget .approvertitle {font-weight:bold;float:left;padding-right:.5em;}
 
 	.tasks  { text-decoration:none;list-style-type:none;text-indent:0px;}
-	.tasks_widget  { margin-left:0px; padding:0px;width:100%;}
+	.tasks_widget  { margin-left:0px; padding:.5em;width:97%;}
 	.tasks_widget .label { margin-left:0px; padding:1em 0px 1.5em 0px}
 	.tasks_widget .approvername {overflow:hide;display:block;font-weight:normal}
 	.tasks_widget .approvertitle {font-weight:bold;float:left;padding-right:.5em;}
 
 	.notes  { text-decoration:none;list-style-type:none;text-indent:0px;}
+	.notes_widget  { margin-left:0px; padding:.5em;width:97%;}
 	.notes_widget .label { margin-left:0px; padding:1em 0px 1.5em 0px}
 	.notes_widget .updated { padding:4px;font-size:.85em}
-	.notes_widget  { margin-left:0px; padding:0px;width:100%;}
 	.notes_widget .title {padding-top:0px;margin-top:0px; }
 
 

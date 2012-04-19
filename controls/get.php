@@ -21,8 +21,6 @@ if (!isset($_REQUEST['new']))
 
 	if (!empty($_REQUEST['from']))
 	{
-		//R::debug(true);
-
 		$from		= R::load($_REQUEST['from'],intval($fid));
 		$data[$_REQUEST['from']] = $from->export();;
 

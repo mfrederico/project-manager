@@ -58,9 +58,9 @@ function approval($d,$type,$item,$notes = array(),$tasks = array())
 
 	// DACI - should be "approver" for each task but lets short cut that for now:
 	if (!mail("{$item['approvername']} <{$item['approveremail']}>",
-			'MattTask: '.$item['title'].' please approve!',
+			'Task: '.$item['title'].' please approve!',
 			$content,
-			"Content-Type: text/html\nFrom: {$d->config['user_name']} via MattTask <{$d->config['user_email']}>")) 
+			"Content-Type: text/html\nFrom: {$d->config['user_name']} via Taskf.ly <{$d->config['user_email']}>")) 
 	{ die('Cannot send approval email!'); }
 }
 
