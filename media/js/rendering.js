@@ -127,7 +127,7 @@ function removeWidget(id)
 
 $(document).ready(function()
 {
-	getDataFor('#main','clients','1');
+	getDataFor('#main_clients','clients','1');
 
 	$('.sortable').live('sortupdate',function(e,ui)
 	{
