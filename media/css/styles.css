@@ -76,6 +76,8 @@ p {
 }
 
 blockquote {
+  margin:0px;
+  padding:7px;
 	font-style: italic;	
 }
 
