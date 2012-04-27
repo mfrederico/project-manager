@@ -4,11 +4,8 @@
 $arch		= (!empty($_REQUEST['arch'])) 	  ? 'NOT' : '';
 $approved	= (!empty($_REQUEST['approved'])) ? 'NOT' : '';
 
-// hard code this *for now*
-//if ($_REQUEST['type'] == 'clients' && !isset($_REQUEST['clients_id'])) $_REQUEST['clients_id'] = 1;
-
 // Get an object from the DB, and its acompanying template -> json array of each in it's template
-$rendered = false;
+//$rendered = false;
 
 // Gets the from object's types
 if (!isset($_REQUEST['new']))
@@ -54,7 +51,6 @@ if (!isset($_REQUEST['new']))
 	}
 }
 
-//print_pre($data);
 print json_encode($data);
 
 ?>
