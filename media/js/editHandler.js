@@ -62,10 +62,11 @@
 					{ 
 						if ($('#editForm').length)
 						{
-							$.get('index.php',$('#editForm').serialize()+'&r=json',function(data)
+							$.post('index.php',$('#editForm').serialize()+'&r=json',function(data)
 							{
 								if (data != null)
 								{
+									// Potentially unsafe
 									if (typeof data['func'] != 'undefined' && data['func'] != null) eval(data['func']);
 								}
 							},'json');

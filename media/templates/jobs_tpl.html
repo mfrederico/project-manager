@@ -4,14 +4,12 @@
 	<a class="ui-button ui-icon ui-icon-comment editHandler" href="index.php?action=get&type=notes&from=jobs&new=1" title="Add note">+ Note</a>
 	<a class="ui-button ui-icon ui-icon-note editHandler" href="index.php?action=get&type=tasks&from=jobs&new=1" title="Add task">+ Task</a>
 	<a href="index.php?action=get&type=jobs" class="ui-button editHandler title">title</a>
+		<div class="ui-state-active ui-helper-hidden">
+			Job Driver: <span class="approvername"></span>&nbsp; <span class="approveremail"></span>
+		</div>
 	</div>
-
 	<div>
 		<blockquote class="content"></blockquote>
-		<div class="ui-state-active">
-			<span class="approvertitle" >Approver:</span>
-			<span class="approvername" style="height:1em;float:left"></span>&nbsp; <span class="approveremail"></span>
-		</div>
 		<ul class="sortable tasks" style="margin-top:7px;"></ul>
 		<ul class="sortable notes" style="margin-top:7px;"></ul>
 	</div>
