@@ -52,7 +52,7 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 				$(id).parent().sortable(
 				{
 					connectWith: '#past',
-					items: '.'+type+'_widget',
+					items: '.'+type+'_widget'
 				});
 
 				plugDataInto(into,id,query_id,vars);
