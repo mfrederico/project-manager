@@ -83,11 +83,11 @@ function plugDataInto(into,id,query_id,vars)
 	{
 		//console.log("Class: "+className+' = '+classVal);
 		$(into).find(id+' .'+className+':first').val(classVal);
-		$(into).find(id+' .'+className+':first').text(classVal);
+		$(into).find(id+' .'+className+':first').html(classVal);
 		// In case we have a hidden field (probably set showhidden class or something)
 		if (classVal != null && typeof classVal != 'undefined' && classVal.length) 
 		{
-			$(into).find(id+' .'+className+':first').show().parent().show();
+			//$(into).find(id+' .'+className+':first').show().parent().show();
 		}
 	});
 	
