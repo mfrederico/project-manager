@@ -1,4 +1,6 @@
-	$(function() { attachEditHandler(); });
+	$(function() { 
+		attachEditHandler(); 
+	});
 
 	function postForm(obj,url)
 	{
@@ -6,6 +8,34 @@
 		{
 			if (data['func'] != undefined) eval(data['func']);
 		},'json');
+	}
+
+	function addTinyMCE()
+	{
+		$('textarea.content').tinymce({
+			// Location of TinyMCE script
+			script_url : 'media/js/tinymce/jscripts/tiny_mce/tiny_mce.js',
+
+			// General options
+			theme : "advanced",
+			plugins : "lists,table,searchreplace,advlist",
+			mode	: "none",
+
+			// Theme options
+			theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|bullist,numlist,|,outdent,indent,|,link,unlink,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect",
+			theme_advanced_buttons2 : "",
+			theme_advanced_buttons3 : "",
+			theme_advanced_buttons4 : "",
+			theme_advanced_toolbar_location : "top",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_statusbar_location : "",
+			theme_advanced_resizing : true,
+		});
+	}
+
+	function removeTinyMCE () {
+		tinyMCE.execCommand('mceFocus', false, 'tiny_mce');
+		tinyMCE.execCommand('mceRemoveControl', false, 'tiny_mce');
 	}
 
 	function addEditDialog(obj,top_id)
@@ -56,7 +86,16 @@
 
 			$("#dialog").html(tplData['edit'+type]).dialog(
 			{
-				width:thisW,height:thisH,modal: true,resizable:false,draggable:true, title: d_title,autoOpen: true,buttons: 
+				width:thisW,
+				height:thisH,
+				modal: true,
+				resizable:false,
+				draggable:true, 
+				title: d_title,
+				autoOpen: true,
+				open: addTinyMCE,
+				close: removeTinyMCE,
+				buttons: 
 				{ 
 					"OK": function() 
 					{ 
