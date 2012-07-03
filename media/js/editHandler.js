@@ -103,14 +103,31 @@
 					{ 
 						if ($('#editForm').length)
 						{
-							$.post('index.php',$('#editForm').serialize()+'&r=json',function(data)
+							formData = $('#editForm').serialize()+'&r=json',
+							$(this).html('<h1>Saving ..</h1>');
+							$(this).dialog('option','buttons',null);
+							$.ajax(
 							{
-								if (data != null)
+								async		: false,
+								url			: 'index.php',
+								type 		: 'POST',
+								data		: formData,
+								dataType	: 'json',
+								cache		: false,
+								success		: function(data,txtStatus)
 								{
-									// Potentially unsafe
-									if (typeof data['func'] != 'undefined' && data['func'] != null) eval(data['func']);
+									if (data != null)
+									{
+										// Potentially unsafe
+										if (typeof data['func'] != 'undefined' && data['func'] != null) 
+										{
+											var df = Function(data['func']);
+											df();
+										}
+									}
 								}
-							},'json');
+							});
+							$(this).dialog('close');
 						}
 					},
 					"Cancel": function() 
