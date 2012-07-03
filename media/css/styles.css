@@ -50,7 +50,7 @@
 	#version		{font-size:10px;}
 
     .orange { color: orange}
-    .logo   { color:black;text-align:left;padding-left:20px;height:40px;font-size:25px;float:left;}
+    .logo   { color:black;text-align:left;padding-left:20px;height:40px;font-size:25px;float:left;font-family:arial}
     #menu   { width:100%;clear:both;height:30px;}
     .menu-list  { padding-left:30px;float:left;line-height:30px;};
 

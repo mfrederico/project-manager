@@ -10,7 +10,7 @@
 		},'json');
 	}
 
-	function addTinyMCE()
+	function addEditor()
 	{
 		$('textarea.content').tinymce({
 			// Location of TinyMCE script
@@ -29,13 +29,12 @@
 			theme_advanced_toolbar_location : "top",
 			theme_advanced_toolbar_align : "left",
 			theme_advanced_statusbar_location : "",
-			theme_advanced_resizing : true,
+			theme_advanced_resizing : true
 		});
 	}
 
-	function removeTinyMCE () {
-		tinyMCE.execCommand('mceFocus', false, 'tiny_mce');
-		tinyMCE.execCommand('mceRemoveControl', false, 'tiny_mce');
+	function removeEditor () {
+		$('textarea.content').remove();
 	}
 
 	function addEditDialog(obj,top_id)
@@ -93,8 +92,11 @@
 				draggable:true, 
 				title: d_title,
 				autoOpen: true,
-				open: addTinyMCE,
-				close: removeTinyMCE,
+				open: addEditor,
+				close: function(ev, ui) {
+					ev.preventDefault();
+					removeEditor();
+				},
 				buttons: 
 				{ 
 					"OK": function() 
@@ -110,11 +112,10 @@
 								}
 							},'json');
 						}
-						$(this).dialog("close");  
-					}, 
+					},
 					"Cancel": function() 
-					{ 
-						$(this).dialog('close'); 
+					{
+						$(this).dialog('close');
 					}
 				}
 			});

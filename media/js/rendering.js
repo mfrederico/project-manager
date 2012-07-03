@@ -19,6 +19,7 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 	console.log(from);
 	console.log(from_id);
 */
+
 	url = '';
 	if (typeof from != 'undefined' && from.length) 
 	{
@@ -35,31 +36,33 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 	{
 		if (data != null)
 		{
-			$(data[type]).each(function(k,vars)
+			// If we actually have data of 'type' 
+			if (typeof data[type] != 'undefined')
 			{
+				// Load up the template if we need
 				if (typeof tplData[type] == 'undefined')
 				{
 					tplData[type] = $.ajax({ url: 'index.php?l=none&page='+type+'_tpl', async: false }).responseText;
 				}
-
-				if (!replace) $(into).append(tplData[type]);
-
-				$(into).find('#'+type).attr('id',type+'_id_'+vars.id);
-
-				id = '#'+type+'_id_'+vars.id;
-				query_id = type+'_id='+vars.id;
-
-				$(id).parent().sortable(
+				jQuery.each(data[type],function(k,vars)
 				{
-					connectWith: '#past',
-					items: '.'+type+'_widget'
+
+					if (!replace) $(into).append(tplData[type]);
+
+					$(into).find('#' + type).attr('id',type + '_id_' + vars.id);
+
+					id			= '#' + type + '_id_' + vars.id;
+					query_id	= type + '_id=' + vars.id;
+
+					$(id).parent().sortable(
+					{
+						connectWith: '#past',
+						items: '.'+type+'_widget'
+					});
+					plugDataInto(into,id,query_id,vars);
+					if (replace) $('#'+type+'_id_'+vars.id).effect('pulsate', { times: 3},250);
 				});
-
-				plugDataInto(into,id,query_id,vars);
-
-				if (replace) $('#'+type+'_id_'+vars.id).effect('pulsate', { times: 3},250);
-
-			});
+			}
 		}
 	});
 }
@@ -87,7 +90,12 @@ function plugDataInto(into,id,query_id,vars)
 		// In case we have a hidden field (probably set showhidden class or something)
 		if (classVal != null && typeof classVal != 'undefined' && classVal.length) 
 		{
-			//$(into).find(id+' .'+className+':first').show().parent().show();
+			if (className != 'content') 
+			{
+				// Show my labels
+				$(id + ' label[for="'+className+'"]').show();
+				$(into).find(id+' .'+className+':first').show().parent().show();
+			}
 		}
 	});
 	

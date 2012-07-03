@@ -35,12 +35,15 @@ function mailUpdate($item,$place)
 			else $msg = "your project has been promoted up - This means it will be getting worked on sooner! <br /><br /><b>Exciting isn't it?</b>";
 
     // DACI - should be "approver" for each task but lets short cut that for now:
-    if (!mail("{$item['approvername']} <{$item['approveremail']}>",
-            "Taskf.ly: Your project promoted to {$p}!",
-			"Project: {$item['title']}<br /><br />\n\n".
-            "Since you are the approver on this project, this is just a quick note letting you know that {$msg}",
-            "Content-Type: text/html\nFrom: {$K->config['user_name']} via Taskf.ly <{$K->config['user_email']}>"))
-    { die('Cannot send approval email!'); }
+	if (!empty($item['approveremail']))
+	{
+		if (!mail("{$item['approvername']} <{$item['approveremail']}>",
+				"Ultrize: Your project promoted to {$p}!",
+				"Project: {$item['title']}<br /><br />\n\n".
+				"Since you are the approver on this project, this is just a quick note letting you know that {$msg}",
+				"Content-Type: text/html\nFrom: {$K->config['user_name']} via Ultrize.com <{$K->config['user_email']}>"))
+		{ die('Cannot send approval email!'); }
+	}
 }
 
 
