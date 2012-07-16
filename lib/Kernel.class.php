@@ -84,7 +84,7 @@ class Kernel
 				{
 					$this->DB = R::setup("{$this->config['db']['type']}:{$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
 				}
-				R::freeze( true ); // uncomment this if we are back to devving the schema
+				R::freeze( false ); // uncomment this if we are back to devving the schema
 			}
 		}
 
@@ -249,6 +249,28 @@ class Kernel
 		return($this);
 	}
 
+	private function checkAuth()
+	{
+		if (empty($_SESSION['auth_id']))
+			return(false);
+		else 
+			return(true);
+	}
+
+	function loadAuth()
+	{
+		$authpages = array('login','logout');
+		if (!$this->checkAuth())
+		{
+			if(!in_array($_REQUEST['page'],$authpages))
+			{
+				$this->setLayout('no_auth');
+				$this->setPage('login');
+			} 
+		}
+		return($this);
+	}
+
 	function loadPlugins()
 	{
 		$x = 0;
@@ -400,6 +422,12 @@ class Kernel
 		$this->pageTitle = $title;
 	}
 	
+	function setPage($page)
+	{
+		$_REQUEST['page'] = $page;
+		unset($_REQUEST['action']);
+	}
+
 	function setRedirect($redirect)
 	{
 		$this->redirect = $redirect;

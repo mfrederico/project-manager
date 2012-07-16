@@ -1,11 +1,18 @@
 <?php
 //die('already done!');
 
+$a = R::dispense('auth');
 $c = R::dispense('clients');
 $j = R::dispense('jobs');
 $t = R::dispense('tasks');
 $n = R::dispense('notes');
 $f = R::dispense('files');
+
+$a->title	= 'Project administrator';
+$a->login	= 'login';
+$a->pass	= 'pass';
+$a->priv	= 'all';
+$this->DB->store($a);
 
 $c->title	= 'Your Tasks';
 $c->order	= 1;

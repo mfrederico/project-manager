@@ -35,6 +35,7 @@ $K = new Kernel();
 
 $K->startSession(0,0)->			// Start my session handling (persistance,use_db)
 			loadClasses()->		// Load up all the classes (smarty etc)
+			loadAuth()->		// Any authentication
 			loadControls()->	// Load controls (pages/actions)
 			loadPlugins()->		// Load any plugins
 			run();				// compile and run everything!
