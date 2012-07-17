@@ -18,39 +18,58 @@ if (!isset($_REQUEST['new']))
 
 	if (!empty($_REQUEST['from']))
 	{
-		$from		= R::load($_REQUEST['from'],intval($fid));
-		$data[$_REQUEST['from']] = $from->export();;
+		// If we get the entire list of items ('from' only set)
+		if (empty($_REQUEST['type'])) $_REQUEST['type'] = $_REQUEST['from'];
+		$from		= ($fid) ? R::find($_REQUEST['from'],' id=? ',array(intval($fid))) : R::find($_REQUEST['from']);
+
+	 	// All the found beans, will you please stand up
+		foreach($from as $f)
+		{
+			$data[$_REQUEST['from']][] = $f->export();
+		}
 
 		// If we dont have a type specified
-		if (!$tid)
+		if (!$tid && $_REQUEST['from'] != $_REQUEST['type'])
 		{	
-			$type	= R::related($from,$_REQUEST['type']," archived {$archived}='' AND approved {$approved}='0' ORDER BY `order`");
-			foreach($type as $t) $data[$_REQUEST['type']][] = $t->export();
+			foreach($from as $f)
+			{
+				$type	= R::related($f,$_REQUEST['type']," archived {$archived}='' AND approved {$approved}='0' ORDER BY `order`");
+				foreach($type as $t) 
+				{
+					$data[$_REQUEST['type']][] = $t->export();
+				}
+			}
 		}
-    // If we are updating a specific "top object"
-    elseif ($_REQUEST['from'] == $_REQUEST['type'])
-    {
-			$b = R::findOne($_REQUEST['type'],' id=? ',array($tid));
-			$data[$_REQUEST['type']] = $b->export();
-    }
-    // If we are updating a heirarchy
+
+		// If we are updating a specific "top object"
+		elseif ($_REQUEST['from'] == $_REQUEST['type'])
+		{
+			$b = R::find($_REQUEST['type'],' id=? ',array($tid));
+			foreach($b as $bb)
+				$data[$_REQUEST['type']] = $bb->export();
+		}
+		// If we are updating a heirarchy
 		else
 		{
-			$b = R::findOne($_REQUEST['type'],' id=? ',array($tid));
-			$data[$_REQUEST['type']][] = $b->export();
+			$b = R::find($_REQUEST['type'],' id=? ',array($tid));
+			foreach($b as $bb)
+				$data[$_REQUEST['type']][] = $bb->export();
 		}
 	}
 	// Gets just the object type (with id)
 	else
 	{
-		$b = R::findOne($_REQUEST['type'],' id=? ',array($tid));
+		$b = ($tid) ?  R::find($_REQUEST['type'],' id=? ',array($tid)) : R::find($_REQUEST['type']);
 		if ($b)
 		{
-			$data[$_REQUEST['type']][] = $b->export();
+			foreach($b as $bb)
+				$data[$_REQUEST['type']][] = $bb->export();
 		}
 	}
 }
 
-print json_encode($data);
+if($_REQUEST['r'] == 'array') print "<pre>".print_r($data,true)."</pre>";
+else
+	print json_encode($data);
 
 ?>

@@ -32,37 +32,49 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 		if (typeof type_id != 'undefined') url+=type+'_id='+type_id+'&';
 	}
 
-	$.getJSON('index.php?action=get&'+url+'&r=json',function(data,ui)
+	$.getJSON('index.php?action=get&r=json&'+url,function(data,ui)
 	{
 		if (data != null)
 		{
 			// If we actually have data of 'type' 
 			if (typeof data[type] != 'undefined')
 			{
-				// Load up the template if we need
+
+				// Load up the template if it's not cached
 				if (typeof tplData[type] == 'undefined')
 				{
 					tplData[type] = $.ajax({ url: 'index.php?l=none&page='+type+'_tpl', async: false }).responseText;
 				}
+
+				// Loop and assign all variables into template
 				jQuery.each(data[type],function(k,vars)
 				{
-
-					if (!replace) $(into).append(tplData[type]);
-
-					$(into).find('#' + type).attr('id',type + '_id_' + vars.id);
-
-					id			= '#' + type + '_id_' + vars.id;
-					query_id	= type + '_id=' + vars.id;
-
-					$(id).parent().sortable(
+					if (vars != null)
 					{
-						connectWith: '#past',
-						items: '.'+type+'_widget'
-					});
-					plugDataInto(into,id,query_id,vars);
-					if (replace) $('#'+type+'_id_'+vars.id).effect('pulsate', { times: 3},250);
+						if (!replace) $(into).append(tplData[type]);
+
+						$(into).find('#' + type).attr('id',type + '_id_' + vars.id);
+
+						id			= '#' + type + '_id_' + vars.id;
+						query_id	= type + '_id=' + vars.id;
+
+						$(id).parent().sortable(
+						{
+							connectWith: '#past',
+							items: '.'+type+'_widget'
+						});
+						plugDataInto(into,id,query_id,vars);
+						if (replace) $('#'+type+'_id_'+vars.id).effect('pulsate', { times: 3},250);
+					}
+
+					// Initialize all the client data
+					if (type == 'clients')
+					{
+						getDataFor(id+" .jobs", "jobs", "", "clients", vars.id);
+					}
 				});
 			}
+
 		}
 	});
 }
@@ -139,7 +151,9 @@ function removeWidget(id)
 
 $(document).ready(function()
 {
-	getDataFor('#main_clients','clients','1');
+	getDataFor('#main_clients','clients','');
+    // Initialize all the client datak
+
 
 	$('.sortable').live('sortupdate',function(e,ui)
 	{

@@ -11,10 +11,11 @@
 
 	.openboth	{ padding-top:-20px;padding-left:.5em}
 
-	.clients_widget { width:100%}
+	.clients_widget { width:99%;border:2px solid black;margin-bottom:10px}
+	.clients_widget .title {font-size:14px;}
 
 	.jobs_widget  {margin-bottom:7px;margin-top:.2em;padding-bottom:.2em;border:1px solid #DDDDDD;background:#EFEFEF} 
-	.jobs_widget .title {padding:7px;margin:7px;}
+	.jobs_widget .title {padding:7px;margin:7px;font-size:12px;text-align:left}
 	.jobs_widget .content {overflow:hide;font-size:11px;display:block;}
 	/* .jobs_widget .approvername {overflow:hide;display:block;} */
 	/* .jobs_widget .approvertitle {font-weight:bold;padding-right:.5em;} */
