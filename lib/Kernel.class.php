@@ -259,7 +259,7 @@ class Kernel
 
 	function loadAuth()
 	{
-		$authpages = array('login','logout');
+		$authpages = array('login','logout','setup');
 		if (!$this->checkAuth())
 		{
 			if(!in_array($_REQUEST['page'],$authpages))

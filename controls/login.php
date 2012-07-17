@@ -3,8 +3,13 @@
 	if (empty($un)) $un = $_REQUEST['login'];
 	if (empty($pw)) $pw = $_REQUEST['pass'];
 
-	$auth = R::findOne('auth',' login=? AND pass=? ',array($un,$pw));
-	if ($auth->id)
+	try 
+	{
+		$auth = R::findOne('auth',' login=? AND pass=? ',array($un,$pw));
+	}
+	catch (Exception $e) { }
+
+	if (isset($auth->id) && !empty($auth->id))
 	{ 
 		$_SESSION['auth_id']    = $auth->id;
 		$_SESSION['login']      = $auth->login;
