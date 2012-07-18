@@ -253,8 +253,9 @@ class Kernel
 	{
 		if (empty($_SESSION['auth_id']))
 			return(false);
-		else 
+		elseif ($_SESSION['auth_db'] == $this->config['db']['database'])
 			return(true);
+		else return(false);
 	}
 
 	function loadAuth()

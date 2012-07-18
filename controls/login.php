@@ -12,6 +12,7 @@
 	if (isset($auth->id) && !empty($auth->id))
 	{ 
 		$_SESSION['auth_id']    = $auth->id;
+		$_SESSION['auth_db']    = $this->config['db']['database'];
 		$_SESSION['login']      = $auth->login;
 		$_SESSION['pass']       = $auth->pass;
 		$this->setRedirect('index.php');
