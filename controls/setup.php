@@ -1,4 +1,6 @@
 <?php
+	set_time_limit(300);
+
 	$data = json_decode(urldecode($_REQUEST['data']),true);
 	if (!isset($data)) die("Don't know what to do.");
 
