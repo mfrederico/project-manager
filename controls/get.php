@@ -4,8 +4,7 @@
 $arch		= (!empty($_REQUEST['arch'])) 	  ? 'NOT' : '';
 $approved	= (!empty($_REQUEST['approved'])) ? 'NOT' : '';
 
-// Get an object from the DB, and its acompanying template -> json array of each in it's template
-//$rendered = false;
+if (isset($_REQUEST['dbg'])) R::debug(TRUE);
 
 // Gets the from object's types
 if (!isset($_REQUEST['new']))
@@ -16,11 +15,13 @@ if (!isset($_REQUEST['new']))
 	$fid  = @intval($_REQUEST[$fidx]);
 	$tid  = @intval($_REQUEST[$tidx]);
 
+	$archapproved = "archived {$archived}=0 AND approved {$approved}=0 ORDER BY `order`";
+
 	if (!empty($_REQUEST['from']))
 	{
 		// If we get the entire list of items ('from' only set)
 		if (empty($_REQUEST['type'])) $_REQUEST['type'] = $_REQUEST['from'];
-		$from		= ($fid) ? R::find($_REQUEST['from'],' id=? ',array(intval($fid))) : R::find($_REQUEST['from']);
+		$from		= ($fid) ? R::find($_REQUEST['from'],' id=? AND '.$archapproved,array(intval($fid))) : R::find($_REQUEST['from'], $archapproved);
 
 	 	// All the found beans, will you please stand up
 		foreach($from as $f)
@@ -33,25 +34,17 @@ if (!isset($_REQUEST['new']))
 		{	
 			foreach($from as $f)
 			{
-				$type	= R::related($f,$_REQUEST['type']," archived {$archived}='' AND approved {$approved}='0' ORDER BY `order`");
-				foreach($type as $t) 
+				$type	= R::related($f, $_REQUEST['type'], $archapproved);
+				foreach ($type as $t) 
 				{
 					$data[$_REQUEST['type']][] = $t->export();
 				}
 			}
 		}
-
-		// If we are updating a specific "top object"
-		elseif ($_REQUEST['from'] == $_REQUEST['type'])
-		{
-			$b = R::find($_REQUEST['type'],' id=? ',array($tid));
-			foreach($b as $bb)
-				$data[$_REQUEST['type']] = $bb->export();
-		}
-		// If we are updating a heirarchy
+		// Grab entire heirarchy
 		else
 		{
-			$b = R::find($_REQUEST['type'],' id=? ',array($tid));
+			$b = R::find($_REQUEST['type'],' id=? AND ' . $archapproved, array($tid));
 			foreach($b as $bb)
 				$data[$_REQUEST['type']][] = $bb->export();
 		}
@@ -59,7 +52,7 @@ if (!isset($_REQUEST['new']))
 	// Gets just the object type (with id)
 	else
 	{
-		$b = ($tid) ?  R::find($_REQUEST['type'],' id=? ',array($tid)) : R::find($_REQUEST['type']);
+		$b = ($tid) ?  R::find($_REQUEST['type'],' id=? '. $archapproved, array($tid)) : R::find($_REQUEST['type'], $archapproved);
 		if ($b)
 		{
 			foreach($b as $bb)

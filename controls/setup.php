@@ -38,7 +38,7 @@
 
 		$j->title	= 'First Job';
 		$j->content	= 'More details';
-		$j->archived= '';
+		$j->archived= '0';
 		$j->approved= '0';
 		$j->content = 'This is the content of your first job.  just a short description of what it is about. Set up tasks by clicking the task icon on the right.';
 		$j->approvername = $data['user']['name'];
@@ -51,7 +51,7 @@
 
 		$t->title	= 'First Task';
 		$t->content	= 'More details';
-		$t->archived= '';
+		$t->archived= '0';
 		$t->approved= '0';
 		$t->order	= 1;
 		$t->content = 'This is a task, it lives inside your jobs.  These can also have approvers attached to them as well';
@@ -65,7 +65,7 @@
 
 		$n->title	= 'First Note';
 		$n->content	= 'More details';
-		$n->archived= '';
+		$n->archived= '0';
 		$n->approved= '0';
 		$n->order	= 1;
 		$n->updated       = date('Y-m-d H:i:s');
@@ -73,7 +73,7 @@
 
 		$f->title	= 'First File';
 		$f->content	= 'Path to file';
-		$f->archived= '';
+		$f->archived= '0';
 		$f->approved= '0';
 		$f->order	= 1;
 

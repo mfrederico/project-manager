@@ -12,6 +12,8 @@ if (isset($_REQUEST[$type]))
 	$t = R::dispense($type);
 	$t->import($_REQUEST[$type]);
 	$t->updated = date('Y-m-d H:i:s');
+	$t->approved = '0';
+	$t->archived = '0';
 	if ($type_id > 0) $t->created = $t->updated;
 	$id = R::store($t);
 
