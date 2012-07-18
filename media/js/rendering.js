@@ -58,6 +58,7 @@ function getDataFor(into,type,type_id,from,from_id,replace)
 						id			= '#' + type + '_id_' + vars.id;
 						query_id	= type + '_id=' + vars.id;
 
+						// Make it a sortable item
 						$(id).parent().sortable(
 						{
 							connectWith: '#past',
@@ -151,10 +152,8 @@ function removeWidget(id)
 
 $(document).ready(function()
 {
+    // Initialize all the client data
 	getDataFor('#main_clients','clients','');
-    // Initialize all the client datak
-
-
 	$('.sortable').live('sortupdate',function(e,ui)
 	{
 		if (typeof $(this).children().attr('class') != 'undefined')
