@@ -35,6 +35,8 @@
 
 		$c->title	= 'First Client';
 		$c->order	= 1;
+		$c->archived= '0';
+		$c->approved= '0';
 
 		$j->title	= 'First Job';
 		$j->content	= 'More details';
