@@ -37,6 +37,7 @@
 		$c->order	= 1;
 		$c->archived= '0';
 		$c->approved= '0';
+		R::store($c);
 
 		$j->title	= 'First Job';
 		$j->content	= 'More details';
@@ -50,6 +51,7 @@
 		$j->updated       = date('Y-m-d H:i:s');
 		$j->created		  = date('Y-m-d H:i:s');
 		$j->order	= 1;
+		R::store($j);
 
 		$t->title	= 'First Task';
 		$t->content	= 'More details';
@@ -64,6 +66,7 @@
 		$t->rate          = '';
 		$t->updated       = date('Y-m-d H:i:s');
 		$t->created		  = date('Y-m-d H:i:s');
+		R::store($t);
 
 		$n->title	= 'First Note';
 		$n->content	= 'More details';
@@ -72,12 +75,14 @@
 		$n->order	= 1;
 		$n->updated       = date('Y-m-d H:i:s');
 		$n->created		  = date('Y-m-d H:i:s');
+		R::store($n);
 
 		$f->title	= 'First File';
 		$f->content	= 'Path to file';
 		$f->archived= '0';
 		$f->approved= '0';
 		$f->order	= 1;
+		R::store($f);
 
 		/*
 		$t->files[]	= $f;
@@ -95,9 +100,9 @@
 		R::store($c);
 		*/
 
-		R::associate($c,$j);
-		R::associate($c,$f);
-		R::associate($c,$n);
+		R::associate($j,$c);
+		R::associate($f,$c);
+		R::associate($n,$c);
 
 		R::associate($j,$t);
 		R::associate($j,$f);
@@ -105,7 +110,6 @@
 
 		R::associate($t,$f);
 		R::associate($t,$n);
-
 
 		/*
 		// Data initialization
