@@ -84,7 +84,7 @@ class Kernel
 				{
 					$this->DB = R::setup("{$this->config['db']['type']}:{$this->config['db']['database']}",$this->config['db']['user'],$this->config['db']['pass']);
 				}
-				R::freeze( false ); // uncomment this if we are back to devving the schema
+				//R::freeze( false ); // uncomment this if we are back to devving the schema
 			}
 		}
 

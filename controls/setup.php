@@ -12,6 +12,7 @@
 		$a->title   = $data['user']['name'];
 		$a->login   = $data['user']['email'];
 		$a->pass    = $data['user']['pass'];
+		$a->email    = $data['user']['email'];
 		$a->priv    = 'all';
 		try { R::store($a); }
 		catch (Exception $e)
